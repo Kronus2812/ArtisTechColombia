@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash screen: ConstraintLayout centra el logotipo y ancla el indicador de carga abajo. -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash">
+
+    <FrameLayout
+        android:id="@+id/contenedorLogo"
+        android:layout_width="@dimen/logo_splash"
+        android:layout_height="@dimen/logo_splash"
+        android:background="@drawable/bg_circulo_translucido"
+        app:layout_constraintBottom_toTopOf="@id/tvNombreApp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_logo"
+            android:src="@drawable/ic_logo_marca" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvNombreApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xl"
+        android:text="@string/app_nombre_corto"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Display"
+        android:textColor="@color/blanco"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@id/tvPais"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contenedorLogo" />
+
+    <TextView
+        android:id="@+id/tvPais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="0.3"
+        android:text="@string/app_pais"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo"
+        android:textColor="@color/mostaza_claro"
+        app:layout_constraintBottom_toTopOf="@id/tvLema"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreApp" />
+
+    <TextView
+        android:id="@+id/tvLema"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_m"
+        android:text="@string/app_lema"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo"
+        android:textColor="@color/blanco_85"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPais" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/espacio_m"
+        android:indeterminate="true"
+        app:indicatorColor="@color/blanco"
+        app:indicatorSize="28dp"
+        app:layout_constraintBottom_toTopOf="@id/tvVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:trackColor="@color/blanco_30"
+        app:trackThickness="3dp" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/espacio_xxl"
+        android:text="@string/splash_version"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+        android:textColor="@color/blanco_70"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

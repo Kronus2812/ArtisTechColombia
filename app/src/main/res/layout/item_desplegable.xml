@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Opción de las listas desplegables (Exposed Dropdown Menu). -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:paddingStart="@dimen/espacio_l"
+    android:paddingTop="@dimen/espacio_m"
+    android:paddingEnd="@dimen/espacio_l"
+    android:paddingBottom="@dimen/espacio_m"
+    android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />

@@ -27,8 +27,8 @@
 
             <TextView
                 android:id="@+id/tvIniciales"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="@dimen/avatar_mediano"
+                android:layout_height="@dimen/avatar_mediano"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/espacio_l"
                 android:background="@drawable/bg_avatar"

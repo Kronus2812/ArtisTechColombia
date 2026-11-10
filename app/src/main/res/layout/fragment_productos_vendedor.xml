@@ -63,7 +63,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
                             android:textColor="@color/blanco"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/texto_destacado" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -88,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/texto_destacado" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -116,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
                             android:textColor="@color/mostaza_oscuro"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/texto_destacado" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -186,7 +186,7 @@
                 android:paddingStart="@dimen/margen_pantalla"
                 android:paddingTop="@dimen/espacio_s"
                 android:paddingEnd="@dimen/margen_pantalla"
-                android:paddingBottom="88dp" />
+                android:paddingBottom="@dimen/espacio_fab" />
 
             <TextView
                 android:id="@+id/tvVacio"

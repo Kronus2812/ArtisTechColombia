@@ -126,7 +126,7 @@
                         android:layout_marginTop="@dimen/espacio_s"
                         android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
                         android:textColor="@color/blanco"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/texto_destacado" />
 
                     <TextView
                         style="@style/Widget.ArtisTech.EtiquetaKpi"

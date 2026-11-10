@@ -93,7 +93,7 @@
             android:paddingStart="@dimen/margen_pantalla"
             android:paddingTop="@dimen/espacio_s"
             android:paddingEnd="@dimen/margen_pantalla"
-            android:paddingBottom="88dp" />
+            android:paddingBottom="@dimen/espacio_fab" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -40,4 +40,50 @@
     <dimen name="texto_secundario">12sp</dimen>
     <dimen name="texto_etiqueta">11sp</dimen>
     <dimen name="texto_kpi">22sp</dimen>
+    <!-- Tamaños de íconos, botones y contenedores -->
+    <dimen name="alto_linea_paso">2dp</dimen>
+    <dimen name="icono_xs">12dp</dimen>
+    <dimen name="icono_mini">14dp</dimen>
+    <dimen name="icono_chip">18dp</dimen>
+    <dimen name="icono_busqueda">20dp</dimen>
+    <dimen name="icono_verificado">22dp</dimen>
+    <dimen name="indicador_paso">26dp</dimen>
+    <dimen name="icono_mediano">28dp</dimen>
+    <dimen name="boton_cantidad">30dp</dimen>
+    <dimen name="boton_cantidad_grande">32dp</dimen>
+    <dimen name="alto_selector_cantidad">34dp</dimen>
+    <dimen name="fab_mini">38dp</dimen>
+    <dimen name="boton_accion">40dp</dimen>
+    <dimen name="alto_boton_compacto">40dp</dimen>
+    <dimen name="alto_toggle">48dp</dimen>
+    <dimen name="alto_boton_cupon">50dp</dimen>
+    <dimen name="icono_xl">56dp</dimen>
+    <dimen name="alto_metodo_pago">56dp</dimen>
+    <dimen name="avatar_mediano">72dp</dimen>
+    <dimen name="ancho_galeria">80dp</dimen>
+    <dimen name="circulo_destacado">88dp</dimen>
+    <dimen name="circulo_confirmacion">104dp</dimen>
+    <dimen name="contenedor_avatar">108dp</dimen>
+    <dimen name="icono_detalle">120dp</dimen>
+    <!-- Espaciados adicionales -->
+    <dimen name="espacio_xxs">2dp</dimen>
+    <dimen name="espacio_micro">3dp</dimen>
+    <dimen name="espacio_compacto">6dp</dimen>
+    <dimen name="relleno_tarjeta">10dp</dimen>
+    <dimen name="relleno_lista">14dp</dimen>
+    <dimen name="espacio_fab">88dp</dimen>
+    <!-- Bordes, radios y grosores -->
+    <dimen name="borde_medio">1.5dp</dimen>
+    <dimen name="borde_grueso">2dp</dimen>
+    <dimen name="grosor_progreso_fino">3dp</dimen>
+    <dimen name="radio_progreso">4dp</dimen>
+    <dimen name="grosor_progreso_medio">5dp</dimen>
+    <dimen name="elevacion_navegacion">8dp</dimen>
+    <dimen name="radio_vista_previa">14dp</dimen>
+    <!-- Tamaños de texto adicionales -->
+    <dimen name="texto_mini">9sp</dimen>
+    <dimen name="texto_chip">13sp</dimen>
+    <dimen name="texto_boton">15sp</dimen>
+    <dimen name="texto_destacado">18sp</dimen>
+    <dimen name="texto_splash">34sp</dimen>
 </resources>

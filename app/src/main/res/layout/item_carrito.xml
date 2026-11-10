@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="@dimen/relleno_tarjeta">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="@dimen/miniatura"
@@ -26,8 +26,8 @@
 
                 <ImageView
                     android:id="@+id/ivIcono"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/icono_mediano"
+                    android:layout_height="@dimen/icono_mediano"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     app:tint="@color/blanco_70" />
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/espacio_xs"
                 android:textAppearance="@style/TextAppearance.ArtisTech.Precio"
-                android:textSize="14sp" />
+                android:textSize="@dimen/texto_cuerpo" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,15 +84,15 @@
             <ImageButton
                 android:id="@+id/btnEliminar"
                 style="@style/Widget.ArtisTech.IconoAccion"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:padding="6dp"
+                android:layout_width="@dimen/boton_cantidad_grande"
+                android:layout_height="@dimen/boton_cantidad_grande"
+                android:padding="@dimen/espacio_compacto"
                 android:contentDescription="@string/cd_eliminar"
                 android:src="@drawable/ic_eliminar" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="@dimen/alto_selector_cantidad"
                 android:background="@drawable/bg_stepper"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -100,28 +100,28 @@
                 <ImageButton
                     android:id="@+id/btnMenos"
                     style="@style/Widget.ArtisTech.IconoAccion"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="6dp"
+                    android:layout_width="@dimen/boton_cantidad"
+                    android:layout_height="@dimen/boton_cantidad"
+                    android:padding="@dimen/espacio_compacto"
                     android:contentDescription="@string/cd_restar"
                     android:src="@drawable/ic_restar"
                     app:tint="@color/terracota" />
 
                 <TextView
                     android:id="@+id/tvCantidad"
-                    android:layout_width="24dp"
+                    android:layout_width="@dimen/icono_m"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
                     android:textColor="@color/cafe_texto"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/texto_chip" />
 
                 <ImageButton
                     android:id="@+id/btnMas"
                     style="@style/Widget.ArtisTech.IconoAccion"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:padding="6dp"
+                    android:layout_width="@dimen/boton_cantidad"
+                    android:layout_height="@dimen/boton_cantidad"
+                    android:padding="@dimen/espacio_compacto"
                     android:contentDescription="@string/cd_sumar"
                     android:src="@drawable/ic_agregar"
                     app:tint="@color/terracota" />

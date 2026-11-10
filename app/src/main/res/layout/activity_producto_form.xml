@@ -35,13 +35,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
+                android:layout_height="@dimen/avatar_grande"
                 android:layout_marginBottom="@dimen/espacio_l"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/btnTomarFoto"
-                    android:layout_width="96dp"
+                    android:layout_width="@dimen/avatar_grande"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_camara_punteada"
                     android:clickable="true"
@@ -51,8 +51,8 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="@dimen/boton_cantidad"
+                        android:layout_height="@dimen/boton_cantidad"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_camara"
                         app:tint="@color/terracota" />
@@ -71,7 +71,7 @@
                     android:layout_marginStart="@dimen/espacio_s"
                     android:layout_marginEnd="@dimen/espacio_s"
                     android:layout_weight="1"
-                    app:cardCornerRadius="14dp"
+                    app:cardCornerRadius="@dimen/radio_vista_previa"
                     app:strokeWidth="0dp">
 
                     <FrameLayout
@@ -82,8 +82,8 @@
 
                         <ImageView
                             android:id="@+id/ivIcono"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="@dimen/boton_accion"
+                            android:layout_height="@dimen/boton_accion"
                             android:layout_gravity="center"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_cat_tejidos"
@@ -101,7 +101,7 @@
 
                 <LinearLayout
                     android:id="@+id/btnGaleria"
-                    android:layout_width="80dp"
+                    android:layout_width="@dimen/ancho_galeria"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_galeria_punteada"
                     android:clickable="true"
@@ -111,8 +111,8 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="@dimen/indicador_paso"
+                        android:layout_height="@dimen/indicador_paso"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_galeria"
                         app:tint="@color/cafe_secundario" />

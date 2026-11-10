@@ -118,8 +118,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
+            android:paddingStart="@dimen/relleno_lista"
+            android:paddingEnd="@dimen/relleno_lista"
             android:paddingBottom="@dimen/espacio_l" />
 
         <LinearLayout
@@ -133,8 +133,8 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_width="@dimen/miniatura"
+                android:layout_height="@dimen/miniatura"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_buscar"
                 app:tint="@color/linea" />

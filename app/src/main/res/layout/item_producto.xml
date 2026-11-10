@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="@dimen/espacio_compacto"
     android:clickable="true"
     android:focusable="true">
 
@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/ivIcono"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="@dimen/icono_xl"
+                android:layout_height="@dimen/icono_xl"
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 app:tint="@color/blanco_70" />
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/relleno_tarjeta">
 
             <TextView
                 android:id="@+id/tvNombre"
@@ -56,18 +56,18 @@
                 android:fontFamily="@font/inter_semibold"
                 android:lines="2"
                 android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo"
-                android:textSize="13sp" />
+                android:textSize="@dimen/texto_chip" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="@dimen/espacio_xxs"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    android:layout_width="@dimen/icono_xs"
+                    android:layout_height="@dimen/icono_xs"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_ubicacion"
                     app:tint="@color/verde_selva" />
@@ -76,7 +76,7 @@
                     android:id="@+id/tvRegion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="@dimen/espacio_xxs"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
@@ -96,11 +96,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Precio"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/texto_cuerpo" />
 
                 <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="@dimen/icono_mini"
+                    android:layout_height="@dimen/icono_mini"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_estrella"
                     app:tint="@color/mostaza" />
@@ -109,7 +109,7 @@
                     android:id="@+id/tvCalificacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginStart="@dimen/espacio_xxs"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
                     android:textColor="@color/cafe_texto" />
             </LinearLayout>

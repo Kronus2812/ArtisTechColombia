@@ -72,7 +72,7 @@ app/src/main/
 - **`colors.xml`:** paleta propia inspirada en materiales artesanales: terracota `#B4472A` (primario), verde selva `#1F5F4A` (confianza y GPS), mostaza `#E0A526` (acento), crema `#FBF6EE` (fondo) y café `#2B2118` (texto). No se usa ningún color por defecto de la plantilla.
 - **`themes.xml`:** hereda de `Theme.Material3.Light.NoActionBar` y reasigna todos los roles de color, la tipografía y el estilo por defecto de cada componente (`materialButtonStyle`, `textInputStyle`, `chipStyle`, `bottomNavigationStyle`…).
 - **`styles.xml`:** apariencias de texto (`TextAppearance.ArtisTech.*`), variantes de botón (primario, verde, contorno, texto, peligro, toggle), campos de texto, tarjetas, chips, FAB, switch, insignias y filas de resumen.
-- **`dimens.xml`:** espaciados en múltiplos de 4dp, radios, alturas y tamaños de texto en `sp`.
+- **`dimens.xml`:** espaciados, radios, grosores, tamaños de íconos y contenedores, y tamaños de texto en `sp`. Ningún layout ni estilo usa valores de `dp` o `sp` escritos directamente.
 - **`strings.xml`:** todos los textos, incluidos plurales (`plurals`), listas (`string-array`) y descripciones de accesibilidad.
 - **Drawables:** `shape` con degradados (fondos por categoría), `selector` (métodos de pago), `ripple` (filas de lista), `layer-list` (banner promocional), bordes punteados (zona de cámara) y 46 íconos `vector`.
 

@@ -28,8 +28,8 @@
             android:paddingBottom="@dimen/espacio_xl">
 
             <FrameLayout
-                android:layout_width="88dp"
-                android:layout_height="88dp"
+                android:layout_width="@dimen/circulo_destacado"
+                android:layout_height="@dimen/circulo_destacado"
                 android:layout_marginTop="@dimen/espacio_l"
                 android:background="@drawable/bg_circulo">
 

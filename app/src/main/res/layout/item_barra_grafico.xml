@@ -11,15 +11,15 @@
         android:id="@+id/tvValor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="@dimen/espacio_xxs"
         android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
         android:textColor="@color/cafe_secundario"
-        android:textSize="9sp" />
+        android:textSize="@dimen/texto_mini" />
 
     <View
         android:id="@+id/vBarra"
         android:layout_width="@dimen/ancho_barra"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/boton_accion"
         android:background="@drawable/bg_barra" />
 
     <TextView

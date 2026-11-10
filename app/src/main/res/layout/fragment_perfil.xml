@@ -24,8 +24,8 @@
             android:paddingBottom="@dimen/espacio_xl">
 
             <FrameLayout
-                android:layout_width="108dp"
-                android:layout_height="108dp">
+                android:layout_width="@dimen/contenedor_avatar"
+                android:layout_height="@dimen/contenedor_avatar">
 
                 <TextView
                     android:id="@+id/tvIniciales"
@@ -55,8 +55,8 @@
                     android:contentDescription="@string/cd_tomar_foto"
                     android:src="@drawable/ic_camara"
                     app:backgroundTint="@color/mostaza"
-                    app:fabCustomSize="38dp"
-                    app:maxImageSize="20dp"
+                    app:fabCustomSize="@dimen/fab_mini"
+                    app:maxImageSize="@dimen/icono_busqueda"
                     app:tint="@color/cafe_texto" />
             </FrameLayout>
 

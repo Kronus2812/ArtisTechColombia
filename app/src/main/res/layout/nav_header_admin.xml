@@ -12,8 +12,8 @@
 
     <TextView
         android:id="@+id/tvIniciales"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/icono_xl"
+        android:layout_height="@dimen/icono_xl"
         android:background="@drawable/bg_circulo_translucido"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.ArtisTech.Titulo"

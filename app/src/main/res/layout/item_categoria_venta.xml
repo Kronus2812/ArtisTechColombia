@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp">
+    android:paddingTop="@dimen/espacio_compacto"
+    android:paddingBottom="@dimen/espacio_compacto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,6 +36,6 @@
         android:max="100"
         app:indicatorColor="@color/terracota"
         app:trackColor="@color/arena"
-        app:trackCornerRadius="4dp"
-        app:trackThickness="8dp" />
+        app:trackCornerRadius="@dimen/radio_progreso"
+        app:trackThickness="@dimen/elevacion_navegacion" />
 </LinearLayout>

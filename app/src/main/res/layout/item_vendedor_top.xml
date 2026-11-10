@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/tvPosicion"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="@dimen/boton_cantidad_grande"
+        android:layout_height="@dimen/boton_cantidad_grande"
         android:background="@drawable/bg_circulo"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo"
@@ -43,5 +43,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.ArtisTech.Precio"
-        android:textSize="14sp" />
+        android:textSize="@dimen/texto_cuerpo" />
 </LinearLayout>

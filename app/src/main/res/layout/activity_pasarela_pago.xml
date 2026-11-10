@@ -40,8 +40,8 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="@dimen/indicador_paso"
+                        android:layout_height="@dimen/indicador_paso"
                         android:background="@drawable/bg_paso_activo"
                         android:gravity="center"
                         android:text="@string/paso_1"
@@ -50,15 +50,15 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="2dp"
+                        android:layout_height="@dimen/alto_linea_paso"
                         android:layout_marginStart="@dimen/espacio_xs"
                         android:layout_marginEnd="@dimen/espacio_xs"
                         android:layout_weight="1"
                         android:background="@color/terracota" />
 
                     <TextView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="@dimen/indicador_paso"
+                        android:layout_height="@dimen/indicador_paso"
                         android:background="@drawable/bg_paso_activo"
                         android:gravity="center"
                         android:text="@string/paso_2"
@@ -67,15 +67,15 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="2dp"
+                        android:layout_height="@dimen/alto_linea_paso"
                         android:layout_marginStart="@dimen/espacio_xs"
                         android:layout_marginEnd="@dimen/espacio_xs"
                         android:layout_weight="1"
                         android:background="@drawable/bg_linea_paso" />
 
                     <TextView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="@dimen/indicador_paso"
+                        android:layout_height="@dimen/indicador_paso"
                         android:background="@drawable/bg_paso_inactivo"
                         android:gravity="center"
                         android:text="@string/paso_3"
@@ -184,7 +184,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rbTarjeta"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="@dimen/alto_metodo_pago"
                         android:layout_marginBottom="@dimen/espacio_s"
                         android:background="@drawable/bg_metodo_pago"
                         android:button="@null"
@@ -201,7 +201,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rbPse"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="@dimen/alto_metodo_pago"
                         android:layout_marginBottom="@dimen/espacio_s"
                         android:background="@drawable/bg_metodo_pago"
                         android:button="@null"
@@ -217,7 +217,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rbNequi"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="@dimen/alto_metodo_pago"
                         android:layout_marginBottom="@dimen/espacio_s"
                         android:background="@drawable/bg_metodo_pago"
                         android:button="@null"
@@ -233,7 +233,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rbEfectivo"
                         android:layout_width="match_parent"
-                        android:layout_height="56dp"
+                        android:layout_height="@dimen/alto_metodo_pago"
                         android:background="@drawable/bg_metodo_pago"
                         android:button="@null"
                         android:drawableStart="@drawable/ic_efectivo"
@@ -406,7 +406,7 @@
 
                         <TableRow>
                             <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_total" android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo" />
-                            <TextView android:id="@+id/tvTotal" style="@style/Widget.ArtisTech.ValorResumen" android:textAppearance="@style/TextAppearance.ArtisTech.Precio" android:textSize="18sp" />
+                            <TextView android:id="@+id/tvTotal" style="@style/Widget.ArtisTech.ValorResumen" android:textAppearance="@style/TextAppearance.ArtisTech.Precio" android:textSize="@dimen/texto_destacado" />
                         </TableRow>
                     </TableLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -478,8 +478,8 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             app:indicatorColor="@color/mostaza"
-            app:indicatorSize="56dp"
-            app:trackThickness="5dp" />
+            app:indicatorSize="@dimen/icono_xl"
+            app:trackThickness="@dimen/grosor_progreso_medio" />
 
         <TextView
             android:layout_width="wrap_content"

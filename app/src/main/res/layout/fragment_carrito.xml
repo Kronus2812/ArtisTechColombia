@@ -67,8 +67,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/espacio_s"
-                        android:layout_marginTop="6dp"
-                        android:minHeight="50dp"
+                        android:layout_marginTop="@dimen/espacio_compacto"
+                        android:minHeight="@dimen/alto_boton_cupon"
                         android:text="@string/aplicar" />
                 </LinearLayout>
 
@@ -105,7 +105,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="@dimen/borde_fino"
                             android:layout_marginTop="@dimen/espacio_s"
                             android:layout_marginBottom="@dimen/espacio_s"
                             android:background="@color/linea" />
@@ -149,13 +149,13 @@
             android:visibility="gone">
 
             <FrameLayout
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="@dimen/avatar_grande"
+                android:layout_height="@dimen/avatar_grande"
                 android:background="@drawable/bg_circulo">
 
                 <ImageView
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:layout_width="@dimen/boton_icono"
+                    android:layout_height="@dimen/boton_icono"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_carrito"

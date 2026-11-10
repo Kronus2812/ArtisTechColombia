@@ -10,13 +10,13 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="104dp"
-        android:layout_height="104dp"
+        android:layout_width="@dimen/circulo_confirmacion"
+        android:layout_height="@dimen/circulo_confirmacion"
         android:background="@drawable/bg_circulo_verde">
 
         <ImageView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/icono_xl"
+            android:layout_height="@dimen/icono_xl"
             android:layout_gravity="center"
             android:contentDescription="@string/cd_confirmado"
             android:src="@drawable/ic_check"

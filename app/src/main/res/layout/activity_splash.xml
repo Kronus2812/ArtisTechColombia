@@ -18,8 +18,8 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <ImageView
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="@dimen/avatar_mediano"
+            android:layout_height="@dimen/avatar_mediano"
             android:layout_gravity="center"
             android:contentDescription="@string/cd_logo"
             android:src="@drawable/ic_logo_marca" />
@@ -33,7 +33,7 @@
         android:text="@string/app_nombre_corto"
         android:textAppearance="@style/TextAppearance.ArtisTech.Display"
         android:textColor="@color/blanco"
-        android:textSize="34sp"
+        android:textSize="@dimen/texto_splash"
         app:layout_constraintBottom_toTopOf="@id/tvPais"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +72,12 @@
         android:layout_marginBottom="@dimen/espacio_m"
         android:indeterminate="true"
         app:indicatorColor="@color/blanco"
-        app:indicatorSize="28dp"
+        app:indicatorSize="@dimen/icono_mediano"
         app:layout_constraintBottom_toTopOf="@id/tvVersion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:trackColor="@color/blanco_30"
-        app:trackThickness="3dp" />
+        app:trackThickness="@dimen/grosor_progreso_fino" />
 
     <TextView
         android:id="@+id/tvVersion"

@@ -28,8 +28,8 @@
 
                 <ImageView
                     android:id="@+id/ivIcono"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="@dimen/icono_detalle"
+                    android:layout_height="@dimen/icono_detalle"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     app:tint="@color/blanco_70" />
@@ -78,7 +78,7 @@
                     android:id="@+id/tvNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="@dimen/espacio_xxs"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Titulo" />
 
                 <LinearLayout
@@ -94,13 +94,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAppearance="@style/TextAppearance.ArtisTech.Precio"
-                        android:textSize="22sp" />
+                        android:textSize="@dimen/texto_kpi" />
 
                     <TextView
                         android:id="@+id/tvCalificacion"
                         style="@style/Widget.ArtisTech.Insignia"
                         android:backgroundTint="@color/mostaza_claro"
-                        android:drawablePadding="4dp"
+                        android:drawablePadding="@dimen/espacio_xs"
                         android:gravity="center_vertical"
                         android:textColor="@color/cafe_texto"
                         app:drawableStartCompat="@drawable/ic_estrella"
@@ -154,7 +154,7 @@
                                 android:id="@+id/tvRegionVendedor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawablePadding="2dp"
+                                android:drawablePadding="@dimen/espacio_xxs"
                                 android:gravity="center_vertical"
                                 android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
                                 app:drawableStartCompat="@drawable/ic_ubicacion"
@@ -162,8 +162,8 @@
                         </LinearLayout>
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="@dimen/icono_verificado"
+                            android:layout_height="@dimen/icono_verificado"
                             android:contentDescription="@string/cd_verificado"
                             android:src="@drawable/ic_escudo"
                             app:tint="@color/verde_selva" />
@@ -178,7 +178,7 @@
                     android:id="@+id/tvDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lineSpacingExtra="3dp"
+                    android:lineSpacingExtra="@dimen/espacio_micro"
                     android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo"
                     android:textColor="@color/cafe_secundario" />
 
@@ -274,7 +274,7 @@
 
             <TextView
                 android:id="@+id/tvCantidad"
-                android:layout_width="32dp"
+                android:layout_width="@dimen/boton_cantidad_grande"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/uno"

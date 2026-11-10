@@ -15,7 +15,7 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="@dimen/relleno_tarjeta">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="@dimen/miniatura"
@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/ivIcono"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="@dimen/icono_mediano"
+                    android:layout_height="@dimen/icono_mediano"
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     app:tint="@color/blanco_70" />

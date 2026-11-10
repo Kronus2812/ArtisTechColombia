@@ -50,7 +50,7 @@
         <LinearLayout
             android:id="@+id/barraBusqueda"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/alto_toggle"
             android:layout_marginTop="@dimen/espacio_l"
             android:background="@drawable/bg_campo_busqueda"
             android:clickable="true"
@@ -62,8 +62,8 @@
             android:paddingEnd="@dimen/espacio_l">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/icono_busqueda"
+                android:layout_height="@dimen/icono_busqueda"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_buscar"
                 app:tint="@color/cafe_secundario" />
@@ -78,8 +78,8 @@
                 android:textSize="@dimen/texto_cuerpo" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/icono_busqueda"
+                android:layout_height="@dimen/icono_busqueda"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_filtro"
                 app:tint="@color/terracota" />

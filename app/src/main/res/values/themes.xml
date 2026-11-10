@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tema global de la aplicación. Hereda de Material 3 y reemplaza TODOS los colores,
+     tipografías y estilos de componentes por los del sistema de diseño de ArtisTech. -->
+<resources>
+
+    <style name="Base.Theme.ArtisTech" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Roles de color de Material 3 -->
+        <item name="colorPrimary">@color/terracota</item>
+        <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorPrimaryContainer">@color/terracota_claro</item>
+        <item name="colorOnPrimaryContainer">@color/terracota_oscuro</item>
+        <item name="colorSecondary">@color/verde_selva</item>
+        <item name="colorOnSecondary">@color/blanco</item>
+        <item name="colorSecondaryContainer">@color/verde_selva_claro</item>
+        <item name="colorOnSecondaryContainer">@color/verde_selva</item>
+        <item name="colorTertiary">@color/mostaza</item>
+        <item name="colorOnTertiary">@color/cafe_texto</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:colorBackground">@color/crema</item>
+        <item name="colorOnBackground">@color/cafe_texto</item>
+        <item name="colorSurface">@color/blanco</item>
+        <item name="colorOnSurface">@color/cafe_texto</item>
+        <item name="colorSurfaceVariant">@color/arena</item>
+        <item name="colorOnSurfaceVariant">@color/cafe_secundario</item>
+        <item name="colorOutline">@color/linea</item>
+        <!-- Barras del sistema -->
+        <item name="android:statusBarColor">@color/crema</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Tipografía global -->
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="fontFamily">@font/inter</item>
+        <!-- Estilos por defecto de los componentes -->
+        <item name="materialButtonStyle">@style/Widget.ArtisTech.Button</item>
+        <item name="textInputStyle">@style/Widget.ArtisTech.TextInput</item>
+        <item name="materialCardViewStyle">@style/Widget.ArtisTech.Card</item>
+        <item name="chipStyle">@style/Widget.ArtisTech.Chip</item>
+        <item name="bottomNavigationStyle">@style/Widget.ArtisTech.BottomNav</item>
+        <item name="toolbarStyle">@style/Widget.ArtisTech.Toolbar</item>
+        <item name="floatingActionButtonStyle">@style/Widget.ArtisTech.Fab</item>
+        <item name="materialSwitchStyle">@style/Widget.ArtisTech.Switch</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.ArtisTech.Dialogo</item>
+    </style>
+
+    <style name="Theme.ArtisTech" parent="Base.Theme.ArtisTech" />
+
+    <!-- Tema exclusivo de la Splash: fondo degradado desde el primer frame -->
+    <style name="Theme.ArtisTech.Splash" parent="Theme.ArtisTech">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:statusBarColor">@color/terracota_oscuro</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Diálogos con los colores de marca -->
+    <style name="ThemeOverlay.ArtisTech.Dialogo" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/terracota</item>
+        <item name="colorSurface">@color/blanco</item>
+        <item name="colorOnSurface">@color/cafe_texto</item>
+    </style>
+</resources>

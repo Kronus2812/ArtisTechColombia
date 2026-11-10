@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Estilos reutilizables: apariencias de texto, componentes Material personalizados
+     y estilos de vistas propias. Evitan repetir atributos en cada layout. -->
+<resources>
+
+    <!-- ===================== APARIENCIAS DE TEXTO ===================== -->
+    <style name="TextAppearance.ArtisTech.Display" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/texto_display</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Titulo" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">@dimen/texto_titulo</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Subtitulo" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">@dimen/texto_subtitulo</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Cuerpo" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:textSize">@dimen/texto_cuerpo</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Secundario" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:textSize">@dimen/texto_secundario</item>
+        <item name="android:textColor">@color/cafe_secundario</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Precio" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/texto_subtitulo</item>
+        <item name="android:textColor">@color/terracota</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Kpi" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">@dimen/texto_kpi</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Boton" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Etiqueta" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">@dimen/texto_etiqueta</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Chip" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.Nav" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.ArtisTech.TituloBarra" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+    </style>
+
+    <!-- ===================== BOTONES ===================== -->
+    <style name="Widget.ArtisTech.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/alto_boton</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">@dimen/radio_boton</item>
+        <item name="backgroundTint">@color/terracota</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="iconTint">@color/blanco</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Boton</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Verde">
+        <item name="backgroundTint">@color/verde_selva</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Blanco">
+        <item name="backgroundTint">@color/blanco</item>
+        <item name="android:textColor">@color/verde_selva</item>
+        <item name="iconTint">@color/verde_selva</item>
+        <item name="android:minHeight">40dp</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Contorno" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/alto_boton</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="cornerRadius">@dimen/radio_boton</item>
+        <item name="strokeColor">@color/terracota</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="android:textColor">@color/terracota</item>
+        <item name="iconTint">@color/terracota</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Boton</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Texto" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/terracota</item>
+        <item name="iconTint">@color/terracota</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Boton</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Peligro" parent="Widget.ArtisTech.Button.Texto">
+        <item name="android:textColor">@color/error</item>
+        <item name="iconTint">@color/error</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Button.Toggle" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">48dp</item>
+        <item name="backgroundTint">@color/selector_toggle_fondo</item>
+        <item name="android:textColor">@color/selector_toggle_texto</item>
+        <item name="strokeColor">@color/terracota</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Boton</item>
+    </style>
+
+    <!-- Botón circular blanco usado sobre imágenes (volver, favorito) -->
+    <style name="Widget.ArtisTech.BotonFlotante" parent="">
+        <item name="android:layout_width">@dimen/boton_icono</item>
+        <item name="android:layout_height">@dimen/boton_icono</item>
+        <item name="android:background">@drawable/bg_circulo_blanco</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="tint">@color/cafe_texto</item>
+    </style>
+
+    <!-- Ícono de acción en filas de listas (editar, eliminar) -->
+    <style name="Widget.ArtisTech.IconoAccion" parent="">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="tint">@color/cafe_secundario</item>
+    </style>
+
+    <!-- ===================== CAMPOS DE TEXTO ===================== -->
+    <style name="Widget.ArtisTech.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radio_input</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radio_input</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radio_input</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radio_input</item>
+        <item name="boxStrokeColor">@color/selector_borde_input</item>
+        <item name="boxBackgroundColor">@color/blanco</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="hintTextColor">@color/terracota</item>
+        <item name="startIconTint">@color/cafe_secundario</item>
+        <item name="endIconTint">@color/cafe_secundario</item>
+        <item name="android:layout_marginBottom">@dimen/espacio_m</item>
+    </style>
+
+    <style name="Widget.ArtisTech.TextInput.Desplegable" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">@dimen/radio_input</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radio_input</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radio_input</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radio_input</item>
+        <item name="boxStrokeColor">@color/selector_borde_input</item>
+        <item name="boxBackgroundColor">@color/blanco</item>
+        <item name="hintTextColor">@color/terracota</item>
+        <item name="startIconTint">@color/cafe_secundario</item>
+        <item name="endIconTint">@color/terracota</item>
+        <item name="android:layout_marginBottom">@dimen/espacio_m</item>
+    </style>
+
+    <!-- ===================== TARJETAS ===================== -->
+    <style name="Widget.ArtisTech.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">@dimen/radio_tarjeta</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@color/blanco</item>
+        <item name="strokeColor">@color/linea</item>
+        <item name="strokeWidth">@dimen/borde_fino</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Card.Destacada">
+        <item name="strokeColor">@color/terracota</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="cardBackgroundColor">@color/terracota_claro</item>
+    </style>
+
+    <!-- Tarjeta de indicador (KPI) usada en paneles -->
+    <style name="Widget.ArtisTech.Card.Kpi">
+        <item name="contentPadding">@dimen/espacio_m</item>
+    </style>
+
+    <!-- ===================== CHIPS ===================== -->
+    <style name="Widget.ArtisTech.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/selector_chip_fondo</item>
+        <item name="android:textColor">@color/selector_chip_texto</item>
+        <item name="chipStrokeColor">@color/selector_chip_borde</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">@dimen/radio_chip</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Chip</item>
+    </style>
+
+    <!-- Chip de acción (no seleccionable) con ícono de categoría -->
+    <style name="Widget.ArtisTech.Chip.Accion" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/blanco</item>
+        <item name="android:textColor">@color/cafe_texto</item>
+        <item name="chipStrokeColor">@color/linea</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">@dimen/radio_chip</item>
+        <item name="chipIconTint">@color/terracota</item>
+        <item name="chipIconSize">18dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Chip</item>
+    </style>
+
+    <!-- ===================== NAVEGACIÓN ===================== -->
+    <style name="Widget.ArtisTech.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">@color/blanco</item>
+        <item name="itemIconTint">@color/selector_nav_item</item>
+        <item name="itemTextColor">@color/selector_nav_item</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.ArtisTech.BottomNav.Indicador</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.ArtisTech.Nav</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.ArtisTech.Nav</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <style name="Widget.ArtisTech.BottomNav.Indicador" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/terracota_claro</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/crema</item>
+        <item name="titleTextAppearance">@style/TextAppearance.ArtisTech.TituloBarra</item>
+        <item name="navigationIconTint">@color/cafe_texto</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Fab" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/terracota</item>
+        <item name="tint">@color/blanco</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.ArtisTech.Fab</item>
+    </style>
+
+    <style name="Widget.ArtisTech.FabExtendido" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
+        <item name="backgroundTint">@color/terracota</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="iconTint">@color/blanco</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Boton</item>
+    </style>
+
+    <style name="Widget.ArtisTech.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="trackTint">@color/selector_switch_pista</item>
+        <item name="thumbTint">@color/blanco</item>
+    </style>
+
+    <!-- ===================== FORMAS ===================== -->
+    <style name="ShapeAppearance.ArtisTech.Fab" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ArtisTech.Circulo" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.ArtisTech.Imagen" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radio_imagen</item>
+    </style>
+
+    <!-- ===================== VISTAS DE TEXTO REUTILIZABLES ===================== -->
+    <!-- Insignia de estado (Publicado, Pendiente...). El color se asigna en código. -->
+    <style name="Widget.ArtisTech.Insignia" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_insignia</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Etiqueta</item>
+    </style>
+
+    <!-- Título de sección dentro de una pantalla -->
+    <style name="Widget.ArtisTech.TituloSeccion" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/espacio_l</item>
+        <item name="android:layout_marginBottom">@dimen/espacio_s</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Subtitulo</item>
+    </style>
+
+    <!-- Etiqueta pequeña de los indicadores (KPI) -->
+    <style name="Widget.ArtisTech.EtiquetaKpi" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Secundario</item>
+    </style>
+
+    <!-- Fila "etiqueta : valor" de los resúmenes de compra -->
+    <style name="Widget.ArtisTech.FilaResumen" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ArtisTech.Cuerpo</item>
+    </style>
+
+    <style name="Widget.ArtisTech.ValorResumen" parent="Widget.ArtisTech.FilaResumen">
+        <item name="android:gravity">end</item>
+        <item name="android:fontFamily">@font/inter_semibold</item>
+    </style>
+
+    <!-- Contenedor de pantalla con márgenes estándar -->
+    <style name="Widget.ArtisTech.Contenedor" parent="">
+        <item name="android:paddingStart">@dimen/margen_pantalla</item>
+        <item name="android:paddingEnd">@dimen/margen_pantalla</item>
+    </style>
+</resources>

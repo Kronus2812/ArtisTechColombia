@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 15 (API 35) fuerza el modo borde a borde. Se desactiva para conservar
+     las barras del sistema con los colores de marca definidos en el tema base. -->
+<resources>
+    <style name="Theme.ArtisTech" parent="Base.Theme.ArtisTech">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fila de producto para gestión (Vendedor y Administrador): estado, stock y acciones CRUD. -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/espacio_s">
+
+    <LinearLayout
+        android:id="@+id/fila"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/miniatura"
+            android:layout_height="@dimen/miniatura"
+            app:cardCornerRadius="@dimen/radio_imagen"
+            app:strokeWidth="0dp">
+
+            <FrameLayout
+                android:id="@+id/contenedorImagen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivIcono"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    app:tint="@color/blanco_70" />
+
+                <ImageView
+                    android:id="@+id/ivFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/cd_foto_producto"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/espacio_m"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_semibold"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+            <TextView
+                android:id="@+id/tvSubtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_xs"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvEstado"
+                    style="@style/Widget.ArtisTech.Insignia" />
+
+                <TextView
+                    android:id="@+id/tvStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/espacio_s"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    android:textSize="@dimen/texto_etiqueta" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnEditar"
+            style="@style/Widget.ArtisTech.IconoAccion"
+            android:contentDescription="@string/cd_editar"
+            android:src="@drawable/ic_editar" />
+
+        <ImageButton
+            android:id="@+id/btnEliminar"
+            style="@style/Widget.ArtisTech.IconoAccion"
+            android:contentDescription="@string/cd_eliminar"
+            android:src="@drawable/ic_eliminar"
+            app:tint="@color/terracota" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

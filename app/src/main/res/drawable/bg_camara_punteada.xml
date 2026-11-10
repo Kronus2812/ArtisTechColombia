@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Área para tomar foto con la cámara (borde punteado) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/terracota_claro" />
+    <stroke
+        android:width="1.5dp"
+        android:color="@color/terracota"
+        android:dashWidth="6dp"
+        android:dashGap="4dp" />
+    <corners android:radius="14dp" />
+</shape>

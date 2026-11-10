@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Banner promocional construido con layer-list: degradado + círculos decorativos superpuestos -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Capa 1: degradado base -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="0"
+                android:startColor="@color/terracota"
+                android:endColor="@color/mostaza" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+    <!-- Capa 2: círculo decorativo grande -->
+    <item
+        android:width="96dp"
+        android:height="96dp"
+        android:gravity="end|top"
+        android:right="14dp"
+        android:top="10dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/blanco_15" />
+        </shape>
+    </item>
+    <!-- Capa 3: círculo decorativo pequeño -->
+    <item
+        android:width="44dp"
+        android:height="44dp"
+        android:gravity="end|bottom"
+        android:bottom="12dp"
+        android:right="96dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/blanco_30" />
+        </shape>
+    </item>
+</layer-list>

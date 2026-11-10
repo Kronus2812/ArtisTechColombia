@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta de total de ventas del reporte -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/terracota_oscuro"
+        android:endColor="@color/terracota"
+        android:type="linear" />
+    <corners android:radius="18dp" />
+</shape>

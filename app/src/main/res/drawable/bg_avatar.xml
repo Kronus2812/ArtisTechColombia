@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Avatar circular con iniciales del usuario (degradado de marca) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/terracota"
+        android:endColor="@color/mostaza" />
+</shape>

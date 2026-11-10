@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo degradado de la pantalla Splash (terracota a mostaza) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:startColor="@color/terracota_oscuro"
+        android:centerColor="@color/terracota"
+        android:endColor="@color/mostaza"
+        android:type="linear" />
+</shape>

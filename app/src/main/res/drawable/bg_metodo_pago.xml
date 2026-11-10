@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Selector de estados para los métodos de pago (RadioButton con forma de tarjeta) -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Seleccionado: borde terracota y fondo claro -->
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/terracota_claro" />
+            <stroke android:width="2dp" android:color="@color/terracota" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+    <!-- Estado normal -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/blanco" />
+            <stroke android:width="1dp" android:color="@color/linea" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+</selector>

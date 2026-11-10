@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom Navigation del Comprador -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_inicio" android:icon="@drawable/ic_inicio" android:title="@string/nav_inicio" />
+    <item android:id="@+id/nav_catalogo" android:icon="@drawable/ic_catalogo" android:title="@string/nav_catalogo" />
+    <item android:id="@+id/nav_carrito" android:icon="@drawable/ic_carrito" android:title="@string/nav_carrito" />
+    <item android:id="@+id/nav_perfil" android:icon="@drawable/ic_perfil" android:title="@string/nav_perfil" />
+</menu>

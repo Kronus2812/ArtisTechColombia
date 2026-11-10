@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Inicio del Comprador: saludo, búsqueda, tarjeta GPS, banner (layer-list), categorías y destacados. -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/Widget.ArtisTech.Contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/espacio_l"
+        android:paddingBottom="@dimen/espacio_xl">
+
+        <!-- Encabezado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSaludo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Titulo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inicio_pregunta"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnNotificaciones"
+                style="@style/Widget.ArtisTech.BotonFlotante"
+                android:contentDescription="@string/cd_notificaciones"
+                android:src="@drawable/ic_notificacion" />
+        </LinearLayout>
+
+        <!-- Barra de búsqueda (abre el catálogo) -->
+        <LinearLayout
+            android:id="@+id/barraBusqueda"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/espacio_l"
+            android:background="@drawable/bg_campo_busqueda"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/espacio_l"
+            android:paddingEnd="@dimen/espacio_l">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_buscar"
+                app:tint="@color/cafe_secundario" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/espacio_s"
+                android:layout_weight="1"
+                android:text="@string/inicio_buscar"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                android:textSize="@dimen/texto_cuerpo" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_filtro"
+                app:tint="@color/terracota" />
+        </LinearLayout>
+
+        <!-- Tarjeta de geolocalización -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_m"
+            android:background="@drawable/bg_tarjeta_gps"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/espacio_m">
+
+            <ImageView
+                android:layout_width="@dimen/icono_m"
+                android:layout_height="@dimen/icono_m"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_ubicacion"
+                app:tint="@color/blanco" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/espacio_m"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvGpsTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gps_titulo_inactivo"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo"
+                    android:textColor="@color/blanco"
+                    android:textSize="@dimen/texto_cuerpo" />
+
+                <TextView
+                    android:id="@+id/tvGpsDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gps_detalle_inactivo"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    android:textColor="@color/blanco_85" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnActivarGps"
+                style="@style/Widget.ArtisTech.Button.Blanco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gps_activar" />
+        </LinearLayout>
+
+        <!-- Banner promocional -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_m"
+            android:background="@drawable/bg_promo"
+            android:orientation="vertical"
+            android:padding="@dimen/espacio_l">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/promo_etiqueta"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                android:textColor="@color/blanco_85" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_xs"
+                android:text="@string/promo_titulo"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Titulo"
+                android:textColor="@color/blanco" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/promo_detalle"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/inicio_categorias" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/grupoCategorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTejidos"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_tejidos"
+                    app:chipIcon="@drawable/ic_cat_tejidos" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCeramica"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_ceramica"
+                    app:chipIcon="@drawable/ic_cat_ceramica" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCesteria"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_cesteria"
+                    app:chipIcon="@drawable/ic_cat_cesteria" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipJoyeria"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_joyeria"
+                    app:chipIcon="@drawable/ic_cat_joyeria" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMadera"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_madera"
+                    app:chipIcon="@drawable/ic_cat_madera" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDiseno"
+                    style="@style/Widget.ArtisTech.Chip.Accion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cat_diseno"
+                    app:chipIcon="@drawable/ic_cat_diseno" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Widget.ArtisTech.TituloSeccion"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/inicio_destacados" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerTodo"
+                style="@style/Widget.ArtisTech.Button.Texto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_s"
+                android:text="@string/ver_todo" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDestacados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

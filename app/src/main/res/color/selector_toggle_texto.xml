@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Texto de los botones del selector de rol. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/terracota_oscuro" android:state_checked="true" />
+    <item android:color="@color/cafe_secundario" />
+</selector>

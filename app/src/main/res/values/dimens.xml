@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dimensiones centralizadas: espaciados en múltiplos de 4dp, radios, alturas y tamaños de texto. -->
+<resources>
+    <!-- Espaciados -->
+    <dimen name="espacio_xs">4dp</dimen>
+    <dimen name="espacio_s">8dp</dimen>
+    <dimen name="espacio_m">12dp</dimen>
+    <dimen name="espacio_l">16dp</dimen>
+    <dimen name="espacio_xl">24dp</dimen>
+    <dimen name="espacio_xxl">32dp</dimen>
+    <dimen name="margen_pantalla">20dp</dimen>
+    <!-- Radios de esquina -->
+    <dimen name="radio_tarjeta">18dp</dimen>
+    <dimen name="radio_boton">26dp</dimen>
+    <dimen name="radio_input">14dp</dimen>
+    <dimen name="radio_chip">20dp</dimen>
+    <dimen name="radio_imagen">12dp</dimen>
+    <!-- Alturas y tamaños -->
+    <dimen name="alto_boton">52dp</dimen>
+    <dimen name="alto_imagen_producto">128dp</dimen>
+    <dimen name="alto_imagen_detalle">300dp</dimen>
+    <dimen name="alto_grafico">150dp</dimen>
+    <dimen name="ancho_barra">18dp</dimen>
+    <dimen name="miniatura">64dp</dimen>
+    <dimen name="avatar_pequeno">44dp</dimen>
+    <dimen name="avatar_grande">96dp</dimen>
+    <dimen name="logo_splash">120dp</dimen>
+    <dimen name="logo_login">72dp</dimen>
+    <dimen name="icono_s">16dp</dimen>
+    <dimen name="icono_m">24dp</dimen>
+    <dimen name="icono_l">40dp</dimen>
+    <dimen name="boton_icono">44dp</dimen>
+    <dimen name="borde_fino">1dp</dimen>
+    <dimen name="franja_alerta">5dp</dimen>
+    <!-- Tamaños de texto -->
+    <dimen name="texto_display">26sp</dimen>
+    <dimen name="texto_titulo">20sp</dimen>
+    <dimen name="texto_subtitulo">16sp</dimen>
+    <dimen name="texto_cuerpo">14sp</dimen>
+    <dimen name="texto_secundario">12sp</dimen>
+    <dimen name="texto_etiqueta">11sp</dimen>
+    <dimen name="texto_kpi">22sp</dimen>
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Paleta de marca ArtisTech Colombia, inspirada en materiales artesanales colombianos.
+     Ningún color de la plantilla por defecto de Android Studio se utiliza. -->
+<resources>
+    <!-- Primario: terracota (barro cocido) -->
+    <color name="terracota">#B4472A</color>
+    <color name="terracota_oscuro">#8E3520</color>
+    <color name="terracota_claro">#FFE9E1</color>
+    <!-- Secundario: verde selva (confianza, verificación, geolocalización) -->
+    <color name="verde_selva">#1F5F4A</color>
+    <color name="verde_selva_medio">#2E7D63</color>
+    <color name="verde_selva_claro">#DDF0E6</color>
+    <!-- Acento: mostaza (fibras naturales) -->
+    <color name="mostaza">#E0A526</color>
+    <color name="mostaza_claro">#FFF1D6</color>
+    <color name="mostaza_oscuro">#8A5A00</color>
+    <!-- Estados informativos -->
+    <color name="azul_rio">#2C5A8C</color>
+    <color name="azul_rio_claro">#E3ECF7</color>
+    <!-- Neutros -->
+    <color name="crema">#FBF6EE</color>
+    <color name="arena">#F4E9DA</color>
+    <color name="blanco">#FFFFFF</color>
+    <color name="cafe_texto">#2B2118</color>
+    <color name="cafe_secundario">#7A6A5C</color>
+    <color name="linea">#EADFD0</color>
+    <color name="error">#B3261E</color>
+    <color name="blanco_85">#D9FFFFFF</color>
+    <color name="blanco_70">#B3FFFFFF</color>
+    <color name="blanco_30">#4DFFFFFF</color>
+    <color name="blanco_15">#26FFFFFF</color>
+    <color name="velo_oscuro">#99000000</color>
+    <!-- Degradados de producto por categoría -->
+    <color name="tejidos_inicio">#C2562E</color>
+    <color name="tejidos_fin">#E0A526</color>
+    <color name="ceramica_inicio">#3A2A22</color>
+    <color name="ceramica_fin">#B4472A</color>
+    <color name="cesteria_inicio">#7A5A2A</color>
+    <color name="cesteria_fin">#C89B4A</color>
+    <color name="joyeria_inicio">#1F5F4A</color>
+    <color name="joyeria_fin">#C89B4A</color>
+    <color name="madera_inicio">#5B3A24</color>
+    <color name="madera_fin">#A9733F</color>
+    <color name="diseno_inicio">#2C5A8C</color>
+    <color name="diseno_fin">#B4472A</color>
+</resources>

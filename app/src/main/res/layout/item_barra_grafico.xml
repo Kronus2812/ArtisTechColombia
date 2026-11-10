@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Columna del gráfico de barras: valor, barra (altura asignada en código) y etiqueta. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+        android:textColor="@color/cafe_secundario"
+        android:textSize="9sp" />
+
+    <View
+        android:id="@+id/vBarra"
+        android:layout_width="@dimen/ancho_barra"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_barra" />
+
+    <TextView
+        android:id="@+id/tvEtiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xs"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+        android:textSize="@dimen/texto_etiqueta" />
+</LinearLayout>

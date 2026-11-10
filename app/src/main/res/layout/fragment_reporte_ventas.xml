@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reporte de ventas: periodo, total, indicadores, gráfico de barras construido con vistas,
+     ventas por categoría (LinearProgressIndicator) y mejores vendedores. -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/Widget.ArtisTech.Contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/espacio_xl">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/grupoPeriodo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checkedChip="@id/chipSemana"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSemana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/periodo_semana" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/periodo_mes" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSemestre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/periodo_semestre" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Total -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_s"
+            android:background="@drawable/bg_tarjeta_total"
+            android:orientation="vertical"
+            android:padding="@dimen/espacio_l">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reporte_total"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                android:textColor="@color/blanco_85" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Display"
+                android:textColor="@color/blanco" />
+
+            <TextView
+                android:id="@+id/tvVariacion"
+                style="@style/Widget.ArtisTech.Insignia"
+                android:layout_marginTop="@dimen/espacio_xs"
+                android:backgroundTint="@color/blanco_30"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_s"
+            android:columnCount="2">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="@dimen/espacio_xs">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/reporte_pedidos" />
+
+                    <TextView
+                        android:id="@+id/tvPedidos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="@dimen/espacio_xs">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/reporte_ticket" />
+
+                    <TextView
+                        android:id="@+id/tvTicket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+        <!-- Gráfico de barras -->
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/reporte_grafico" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/contenedorBarras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="@dimen/espacio_m" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Ventas por categoría -->
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/reporte_categorias" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/contenedorCategorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/espacio_m" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Mejores vendedores -->
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/reporte_vendedores" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/contenedorVendedores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/espacio_s" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_s"
+            android:text="@string/reporte_nota"
+            android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+            android:textSize="@dimen/texto_etiqueta" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExportar"
+            style="@style/Widget.ArtisTech.Button.Contorno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_l"
+            android:text="@string/reporte_exportar"
+            app:icon="@drawable/ic_descargar" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

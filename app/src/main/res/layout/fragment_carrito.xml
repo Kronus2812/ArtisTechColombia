@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CRUD de Carrito: lista editable, cupón, resumen de costos y estado vacío. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margen_pantalla"
+        android:layout_marginTop="@dimen/espacio_l"
+        android:layout_marginBottom="@dimen/espacio_s"
+        android:text="@string/carrito_titulo"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Titulo" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/contenido"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                style="@style/Widget.ArtisTech.Contenedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/espacio_l">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCarrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_s"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCupon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/carrito_cupon"
+                        app:startIconDrawable="@drawable/ic_cupon">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCupon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapCharacters" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAplicarCupon"
+                        style="@style/Widget.ArtisTech.Button.Contorno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/espacio_s"
+                        android:layout_marginTop="6dp"
+                        android:minHeight="50dp"
+                        android:text="@string/aplicar" />
+                </LinearLayout>
+
+                <!-- Resumen con TableLayout -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/espacio_l"
+                        android:stretchColumns="1">
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_subtotal" />
+                            <TextView android:id="@+id/tvSubtotal" style="@style/Widget.ArtisTech.ValorResumen" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_descuento" />
+                            <TextView android:id="@+id/tvDescuento" style="@style/Widget.ArtisTech.ValorResumen" android:textColor="@color/verde_selva" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_envio" />
+                            <TextView android:id="@+id/tvEnvio" style="@style/Widget.ArtisTech.ValorResumen" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_iva" android:textColor="@color/cafe_secundario" />
+                            <TextView android:id="@+id/tvIva" style="@style/Widget.ArtisTech.ValorResumen" android:textColor="@color/cafe_secundario" />
+                        </TableRow>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/espacio_s"
+                            android:layout_marginBottom="@dimen/espacio_s"
+                            android:background="@color/linea" />
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_total" android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo" />
+                            <TextView android:id="@+id/tvTotal" style="@style/Widget.ArtisTech.ValorResumen" android:textAppearance="@style/TextAppearance.ArtisTech.Precio" />
+                        </TableRow>
+                    </TableLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_m"
+                    android:drawablePadding="@dimen/espacio_s"
+                    android:gravity="center_vertical"
+                    android:text="@string/carrito_retracto"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    app:drawableStartCompat="@drawable/ic_camion"
+                    app:drawableTint="@color/verde_selva" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnContinuar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_l"
+                    android:text="@string/carrito_continuar"
+                    app:icon="@drawable/ic_candado" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Estado vacío -->
+        <LinearLayout
+            android:id="@+id/vistaVacia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/espacio_xl"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/bg_circulo">
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_carrito"
+                    app:tint="@color/terracota" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_l"
+                android:text="@string/carrito_vacio_titulo"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_xs"
+                android:gravity="center"
+                android:text="@string/carrito_vacio_detalle"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExplorar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_l"
+                android:paddingStart="@dimen/espacio_xl"
+                android:paddingEnd="@dimen/espacio_xl"
+                android:text="@string/carrito_explorar" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

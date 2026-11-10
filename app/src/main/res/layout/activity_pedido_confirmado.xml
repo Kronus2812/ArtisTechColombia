@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Confirmación del pedido (paso 3 de la pasarela). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.ArtisTech.Contenedor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:background="@drawable/bg_circulo_verde">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_confirmado"
+            android:src="@drawable/ic_check"
+            app:tint="@color/blanco" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xl"
+        android:text="@string/confirmado_titulo"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Display" />
+
+    <TextView
+        android:id="@+id/tvCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xs"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo"
+        android:textColor="@color/cafe_secundario" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xl">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/espacio_l"
+            android:stretchColumns="1">
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_total" />
+                <TextView android:id="@+id/tvTotal" style="@style/Widget.ArtisTech.ValorResumen" android:textAppearance="@style/TextAppearance.ArtisTech.Precio" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_metodo" />
+                <TextView android:id="@+id/tvMetodo" style="@style/Widget.ArtisTech.ValorResumen" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_entrega" />
+                <TextView style="@style/Widget.ArtisTech.ValorResumen" android:text="@string/confirmado_entrega_valor" />
+            </TableRow>
+        </TableLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_m"
+        android:gravity="center"
+        android:text="@string/confirmado_nota"
+        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSeguirComprando"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_xl"
+        android:text="@string/confirmado_seguir" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnVerPedidos"
+        style="@style/Widget.ArtisTech.Button.Contorno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/espacio_s"
+        android:text="@string/confirmado_ver_pedidos" />
+</LinearLayout>

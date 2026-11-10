@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pasarela de pagos (RF-13 y RF-14): pasos, dirección, método de pago con RadioGroup estilizado,
+     formularios por método, resumen y confirmación con huella. FrameLayout raíz para superponer la carga. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_atras"
+            app:title="@string/pago_titulo" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                style="@style/Widget.ArtisTech.Contenedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/espacio_l">
+
+                <!-- Indicador de pasos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:background="@drawable/bg_paso_activo"
+                        android:gravity="center"
+                        android:text="@string/paso_1"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/blanco" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="@dimen/espacio_xs"
+                        android:layout_marginEnd="@dimen/espacio_xs"
+                        android:layout_weight="1"
+                        android:background="@color/terracota" />
+
+                    <TextView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:background="@drawable/bg_paso_activo"
+                        android:gravity="center"
+                        android:text="@string/paso_2"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/blanco" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginStart="@dimen/espacio_xs"
+                        android:layout_marginEnd="@dimen/espacio_xs"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_linea_paso" />
+
+                    <TextView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:background="@drawable/bg_paso_inactivo"
+                        android:gravity="center"
+                        android:text="@string/paso_3"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/cafe_secundario" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_xs"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/paso_envio"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/terracota" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/paso_pago"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/terracota" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/paso_confirmacion"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Etiqueta"
+                        android:textColor="@color/cafe_secundario" />
+                </LinearLayout>
+
+                <!-- Dirección de envío -->
+                <TextView
+                    style="@style/Widget.ArtisTech.TituloSeccion"
+                    android:text="@string/pago_direccion" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/espacio_m">
+
+                        <ImageView
+                            android:layout_width="@dimen/icono_m"
+                            android:layout_height="@dimen/icono_m"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_ubicacion"
+                            app:tint="@color/verde_selva" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/espacio_m"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvDireccion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="@string/direccion_1"
+                                android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pago_direccion_detalle"
+                                android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCambiarDireccion"
+                            style="@style/Widget.ArtisTech.Button.Texto"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cambiar" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Métodos de pago -->
+                <TextView
+                    style="@style/Widget.ArtisTech.TituloSeccion"
+                    android:text="@string/pago_metodo" />
+
+                <RadioGroup
+                    android:id="@+id/grupoMetodo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbTarjeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="@dimen/espacio_s"
+                        android:background="@drawable/bg_metodo_pago"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableStart="@drawable/ic_tarjeta"
+                        android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                        android:drawablePadding="@dimen/espacio_m"
+                        android:drawableTint="@color/terracota"
+                        android:paddingStart="@dimen/espacio_l"
+                        android:paddingEnd="@dimen/espacio_m"
+                        android:text="@string/metodo_tarjeta"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbPse"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="@dimen/espacio_s"
+                        android:background="@drawable/bg_metodo_pago"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_banco"
+                        android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                        android:drawablePadding="@dimen/espacio_m"
+                        android:drawableTint="@color/terracota"
+                        android:paddingStart="@dimen/espacio_l"
+                        android:paddingEnd="@dimen/espacio_m"
+                        android:text="@string/metodo_pse"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbNequi"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="@dimen/espacio_s"
+                        android:background="@drawable/bg_metodo_pago"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_telefono"
+                        android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                        android:drawablePadding="@dimen/espacio_m"
+                        android:drawableTint="@color/terracota"
+                        android:paddingStart="@dimen/espacio_l"
+                        android:paddingEnd="@dimen/espacio_m"
+                        android:text="@string/metodo_billetera"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbEfectivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_metodo_pago"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_efectivo"
+                        android:drawableEnd="?android:attr/listChoiceIndicatorSingle"
+                        android:drawablePadding="@dimen/espacio_m"
+                        android:drawableTint="@color/terracota"
+                        android:paddingStart="@dimen/espacio_l"
+                        android:paddingEnd="@dimen/espacio_m"
+                        android:text="@string/metodo_efectivo"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+                </RadioGroup>
+
+                <!-- Formulario: tarjeta -->
+                <LinearLayout
+                    android:id="@+id/formTarjeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_l"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilNumeroTarjeta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/campo_numero_tarjeta"
+                        app:startIconDrawable="@drawable/ic_tarjeta">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etNumeroTarjeta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789 "
+                            android:inputType="number"
+                            android:maxLength="19" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilTitular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/campo_titular"
+                        app:startIconDrawable="@drawable/ic_perfil">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTitular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapCharacters" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilVencimiento"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/espacio_s"
+                            android:layout_weight="1"
+                            android:hint="@string/campo_vencimiento">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etVencimiento"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:digits="0123456789/"
+                                android:inputType="number"
+                                android:maxLength="5" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilCvv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="@string/campo_cvv"
+                            app:endIconMode="password_toggle">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etCvv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberPassword"
+                                android:maxLength="4" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Formulario: PSE -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilBanco"
+                    style="@style/Widget.ArtisTech.TextInput.Desplegable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_l"
+                    android:hint="@string/campo_banco"
+                    android:visibility="gone"
+                    app:startIconDrawable="@drawable/ic_banco">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/actBanco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Formulario: billetera móvil -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCelularPago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_l"
+                    android:hint="@string/campo_celular_pago"
+                    android:visibility="gone"
+                    app:startIconDrawable="@drawable/ic_telefono">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCelularPago"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:maxLength="10" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Información: efectivo -->
+                <TextView
+                    android:id="@+id/tvInfoEfectivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_l"
+                    android:background="@drawable/bg_stepper"
+                    android:backgroundTint="@color/mostaza_claro"
+                    android:padding="@dimen/espacio_m"
+                    android:text="@string/pago_info_efectivo"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    android:textColor="@color/mostaza_oscuro"
+                    android:visibility="gone" />
+
+                <!-- Resumen -->
+                <TextView
+                    style="@style/Widget.ArtisTech.TituloSeccion"
+                    android:text="@string/pago_resumen" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/espacio_l"
+                        android:stretchColumns="1">
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:id="@+id/tvEtiquetaProductos" />
+                            <TextView android:id="@+id/tvSubtotal" style="@style/Widget.ArtisTech.ValorResumen" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_descuento" />
+                            <TextView android:id="@+id/tvDescuento" style="@style/Widget.ArtisTech.ValorResumen" android:textColor="@color/verde_selva" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_envio" />
+                            <TextView android:id="@+id/tvEnvio" style="@style/Widget.ArtisTech.ValorResumen" />
+                        </TableRow>
+
+                        <TableRow>
+                            <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/resumen_total" android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo" />
+                            <TextView android:id="@+id/tvTotal" style="@style/Widget.ArtisTech.ValorResumen" android:textAppearance="@style/TextAppearance.ArtisTech.Precio" android:textSize="18sp" />
+                        </TableRow>
+                    </TableLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_m"
+                    android:drawablePadding="@dimen/espacio_s"
+                    android:gravity="center_vertical"
+                    android:text="@string/pago_seguro"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    android:textColor="@color/verde_selva"
+                    app:drawableStartCompat="@drawable/ic_escudo"
+                    app:drawableTint="@color/verde_selva" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/cbTerminos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/espacio_s"
+                    android:text="@string/pago_terminos"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    app:buttonTint="@color/terracota" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Acciones de pago -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_barra_inferior"
+            android:orientation="horizontal"
+            android:padding="@dimen/espacio_l">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPagar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/espacio_s"
+                android:layout_weight="1"
+                android:text="@string/pago_pagar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPagarHuella"
+                style="@style/Widget.ArtisTech.Button.Verde"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/pago_huella"
+                app:icon="@drawable/ic_huella" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Capa de carga mientras se procesa el pago -->
+    <LinearLayout
+        android:id="@+id/capaCarga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/velo_oscuro"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorColor="@color/mostaza"
+            app:indicatorSize="56dp"
+            app:trackThickness="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_l"
+            android:text="@string/pago_procesando"
+            android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo"
+            android:textColor="@color/blanco" />
+    </LinearLayout>
+</FrameLayout>

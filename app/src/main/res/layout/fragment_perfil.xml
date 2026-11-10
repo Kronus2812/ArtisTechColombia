@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CRUD de Perfil compartido por los tres roles. Muestra secciones según el rol:
+     datos del taller (Vendedor) y mis pedidos (Comprador). -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/espacio_xl">
+
+        <!-- Encabezado con avatar y cámara -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_encabezado"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/espacio_xl"
+            android:paddingBottom="@dimen/espacio_xl">
+
+            <FrameLayout
+                android:layout_width="108dp"
+                android:layout_height="108dp">
+
+                <TextView
+                    android:id="@+id/tvIniciales"
+                    android:layout_width="@dimen/avatar_grande"
+                    android:layout_height="@dimen/avatar_grande"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_circulo_translucido"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Display"
+                    android:textColor="@color/blanco" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="@dimen/avatar_grande"
+                    android:layout_height="@dimen/avatar_grande"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/cd_foto_perfil"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.ArtisTech.Circulo" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="@string/cd_tomar_foto"
+                    android:src="@drawable/ic_camara"
+                    app:backgroundTint="@color/mostaza"
+                    app:fabCustomSize="38dp"
+                    app:maxImageSize="20dp"
+                    app:tint="@color/cafe_texto" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_m"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Titulo"
+                android:textColor="@color/blanco" />
+
+            <TextView
+                android:id="@+id/tvRol"
+                style="@style/Widget.ArtisTech.Insignia"
+                android:layout_marginTop="@dimen/espacio_xs"
+                android:backgroundTint="@color/blanco_30"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/Widget.ArtisTech.Contenedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Widget.ArtisTech.TituloSeccion"
+                android:text="@string/perfil_datos" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNombres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/campo_nombres"
+                app:startIconDrawable="@drawable/ic_perfil">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="@string/campo_email"
+                app:helperText="@string/perfil_email_ayuda"
+                app:startIconDrawable="@drawable/ic_correo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/campo_telefono"
+                app:startIconDrawable="@drawable/ic_telefono">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="10" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDocumento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="@string/campo_documento"
+                app:startIconDrawable="@drawable/ic_documento">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etDocumento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Datos del taller (solo Vendedor) -->
+            <LinearLayout
+                android:id="@+id/seccionTaller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/Widget.ArtisTech.TituloSeccion"
+                    android:text="@string/perfil_taller" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilTaller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/campo_taller"
+                    app:startIconDrawable="@drawable/ic_tienda">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTaller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilRut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/campo_rut"
+                    app:startIconDrawable="@drawable/ic_documento">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilRegion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/campo_region"
+                    app:startIconDrawable="@drawable/ic_ubicacion">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRegion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilOficio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/campo_oficio"
+                    app:startIconDrawable="@drawable/ic_cat_tejidos">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOficio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Preferencias -->
+            <TextView
+                style="@style/Widget.ArtisTech.TituloSeccion"
+                android:text="@string/perfil_preferencias" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/espacio_m">
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/swNotificaciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/perfil_notificaciones"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/espacio_s"
+                        android:text="@string/perfil_notificaciones_ayuda"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                        android:textSize="@dimen/texto_etiqueta" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/swHuella"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/perfil_huella"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/perfil_huella_ayuda"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                        android:textSize="@dimen/texto_etiqueta" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Mis pedidos (solo Comprador) -->
+            <LinearLayout
+                android:id="@+id/seccionPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvTituloPedidos"
+                    style="@style/Widget.ArtisTech.TituloSeccion"
+                    android:text="@string/perfil_mis_pedidos" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMisPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <TextView
+                    android:id="@+id/tvSinPedidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/perfil_sin_pedidos"
+                    android:textAppearance="@style/TextAppearance.ArtisTech.Secundario"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_xl"
+                android:text="@string/perfil_guardar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesion"
+                style="@style/Widget.ArtisTech.Button.Contorno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_s"
+                android:text="@string/cerrar_sesion"
+                app:icon="@drawable/ic_salir" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminarCuenta"
+                style="@style/Widget.ArtisTech.Button.Peligro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/espacio_s"
+                android:text="@string/perfil_eliminar"
+                app:icon="@drawable/ic_eliminar" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

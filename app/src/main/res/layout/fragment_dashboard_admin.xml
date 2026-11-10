@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dashboard principal del Administrador: indicadores en GridLayout, alertas y accesos rápidos. -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        style="@style/Widget.ArtisTech.Contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/espacio_xl">
+
+        <TextView
+            android:id="@+id/tvSaludo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.ArtisTech.Titulo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/espacio_m"
+            android:text="@string/dashboard_subtitulo"
+            android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+
+        <!-- Indicadores (GridLayout de 2 columnas) -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="false">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="@dimen/espacio_xs"
+                android:layout_marginBottom="@dimen/espacio_s">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icono_m"
+                        android:layout_height="@dimen/icono_m"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_usuarios"
+                        app:tint="@color/terracota" />
+
+                    <TextView
+                        android:id="@+id/tvKpiUsuarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espacio_s"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi" />
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/kpi_usuarios" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="@dimen/espacio_xs"
+                android:layout_marginBottom="@dimen/espacio_s">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icono_m"
+                        android:layout_height="@dimen/icono_m"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_tienda"
+                        app:tint="@color/verde_selva" />
+
+                    <TextView
+                        android:id="@+id/tvKpiVendedores"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espacio_s"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi" />
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/kpi_vendedores" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="@dimen/espacio_xs"
+                app:cardBackgroundColor="@color/terracota"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icono_m"
+                        android:layout_height="@dimen/icono_m"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_reporte"
+                        app:tint="@color/blanco" />
+
+                    <TextView
+                        android:id="@+id/tvKpiVentas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espacio_s"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
+                        android:textColor="@color/blanco"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/kpi_ventas"
+                        android:textColor="@color/blanco_85" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.ArtisTech.Card.Kpi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="@dimen/espacio_xs"
+                app:cardBackgroundColor="@color/mostaza_claro"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icono_m"
+                        android:layout_height="@dimen/icono_m"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_alerta"
+                        app:tint="@color/mostaza_oscuro" />
+
+                    <TextView
+                        android:id="@+id/tvKpiPendientes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espacio_s"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Kpi"
+                        android:textColor="@color/mostaza_oscuro" />
+
+                    <TextView
+                        style="@style/Widget.ArtisTech.EtiquetaKpi"
+                        android:text="@string/kpi_pendientes"
+                        android:textColor="@color/mostaza_oscuro" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </GridLayout>
+
+        <!-- Alertas -->
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/dashboard_alertas" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/alertaModeracion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/espacio_s"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/franja_alerta"
+                    android:layout_height="match_parent"
+                    android:background="@color/terracota" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/espacio_m">
+
+                    <TextView
+                        android:id="@+id/tvAlertaModeracion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/alerta_moderacion_detalle"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/alertaVerificacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/espacio_s"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/franja_alerta"
+                    android:layout_height="match_parent"
+                    android:background="@color/mostaza" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/espacio_m">
+
+                    <TextView
+                        android:id="@+id/tvAlertaVerificacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/alerta_verificacion_detalle"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/franja_alerta"
+                    android:layout_height="match_parent"
+                    android:background="@color/verde_selva" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/espacio_m">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/alerta_habeas"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Cuerpo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/alerta_habeas_detalle"
+                        android:textAppearance="@style/TextAppearance.ArtisTech.Secundario" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Accesos rápidos -->
+        <TextView
+            style="@style/Widget.ArtisTech.TituloSeccion"
+            android:text="@string/dashboard_accesos" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIrUsuarios"
+                style="@style/Widget.ArtisTech.Button.Contorno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="@dimen/espacio_xs"
+                android:layout_marginBottom="@dimen/espacio_s"
+                android:text="@string/admin_usuarios"
+                app:icon="@drawable/ic_usuarios" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIrProductos"
+                style="@style/Widget.ArtisTech.Button.Contorno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="@dimen/espacio_xs"
+                android:layout_marginBottom="@dimen/espacio_s"
+                android:text="@string/admin_productos_corto"
+                app:icon="@drawable/ic_productos" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIrReporte"
+                style="@style/Widget.ArtisTech.Button.Contorno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginEnd="@dimen/espacio_xs"
+                android:text="@string/admin_reporte_corto"
+                app:icon="@drawable/ic_reporte" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIrPerfil"
+                style="@style/Widget.ArtisTech.Button.Contorno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="@dimen/espacio_xs"
+                android:text="@string/admin_perfil"
+                app:icon="@drawable/ic_perfil" />
+        </GridLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

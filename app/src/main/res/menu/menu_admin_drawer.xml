@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Menú lateral (Drawer) del Administrador -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/grupo_gestion" android:checkableBehavior="single">
+        <item android:id="@+id/nav_dashboard" android:icon="@drawable/ic_dashboard" android:title="@string/admin_dashboard" />
+        <item android:id="@+id/nav_usuarios" android:icon="@drawable/ic_usuarios" android:title="@string/admin_usuarios" />
+        <item android:id="@+id/nav_productos_admin" android:icon="@drawable/ic_productos" android:title="@string/admin_productos" />
+        <item android:id="@+id/nav_reporte" android:icon="@drawable/ic_reporte" android:title="@string/admin_reporte" />
+        <item android:id="@+id/nav_perfil_admin" android:icon="@drawable/ic_perfil" android:title="@string/admin_perfil" />
+    </group>
+    <group android:id="@+id/grupo_sesion">
+        <item android:id="@+id/nav_salir" android:icon="@drawable/ic_salir" android:title="@string/cerrar_sesion" />
+    </group>
+</menu>

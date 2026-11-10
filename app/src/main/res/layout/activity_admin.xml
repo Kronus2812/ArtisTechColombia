@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contenedor del Administrador con menú lateral (DrawerLayout + NavigationView). -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/contenedorAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        app:headerLayout="@layout/nav_header_admin"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemShapeFillColor="@color/selector_drawer_fondo"
+        app:itemTextAppearance="@style/TextAppearance.ArtisTech.Chip"
+        app:itemTextColor="@color/selector_nav_item"
+        app:menu="@menu/menu_admin_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

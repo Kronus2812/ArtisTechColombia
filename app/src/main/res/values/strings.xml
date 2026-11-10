@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Todos los textos de la interfaz centralizados (facilita traducción y mantenimiento). -->
+<resources>
+    <!-- ===== App ===== -->
+    <string name="app_name">ArtisTech Colombia</string>
+    <string name="app_nombre_corto">ArtisTech</string>
+    <string name="app_pais">COLOMBIA</string>
+    <string name="app_lema">Lo hecho a mano, cerca de ti</string>
+    <string name="splash_version">Versión 1.0.0 · Marketplace artesanal</string>
+
+    <!-- ===== Comunes ===== -->
+    <string name="guardar">Guardar cambios</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="aplicar">Aplicar</string>
+    <string name="cambiar">Cambiar</string>
+    <string name="entendido">Entendido</string>
+    <string name="salir">Salir</string>
+    <string name="aprobar">Aprobar</string>
+    <string name="rechazar">Rechazar</string>
+    <string name="ver_todo">Ver todo</string>
+    <string name="ver_carrito">Ver carrito</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="uno">1</string>
+    <string name="simbolo_peso">$</string>
+    <string name="valor_negativo">−%1$s</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="cerrar_sesion_mensaje">¿Deseas cerrar tu sesión de administrador?</string>
+    <string name="ir_a_ingresar">Ir a iniciar sesión</string>
+    <string name="iniciales_nuevo">+</string>
+
+    <!-- ===== Roles ===== -->
+    <string name="rol_comprador">Comprador</string>
+    <string name="rol_vendedor">Vendedor</string>
+    <string name="rol_admin">Administrador</string>
+
+    <!-- ===== Navegación ===== -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_catalogo">Catálogo</string>
+    <string name="nav_carrito">Carrito</string>
+    <string name="nav_perfil">Perfil</string>
+    <string name="nav_productos">Productos</string>
+    <string name="nav_pedidos">Pedidos</string>
+    <string name="drawer_abrir">Abrir menú</string>
+    <string name="drawer_cerrar">Cerrar menú</string>
+
+    <!-- ===== Campos ===== -->
+    <string name="campo_email">Correo electrónico</string>
+    <string name="campo_clave">Contraseña</string>
+    <string name="campo_clave_temporal">Contraseña temporal</string>
+    <string name="campo_confirmar_clave">Confirmar contraseña</string>
+    <string name="campo_nueva_clave">Nueva contraseña</string>
+    <string name="campo_nombres">Nombres y apellidos</string>
+    <string name="campo_telefono">Celular</string>
+    <string name="campo_tipo_doc">Tipo</string>
+    <string name="campo_documento">Número de documento</string>
+    <string name="campo_codigo">Código de verificación</string>
+    <string name="campo_rol">Rol</string>
+    <string name="campo_estado">Estado de la cuenta</string>
+    <string name="campo_taller">Nombre del taller</string>
+    <string name="campo_rut">RUT / NIT</string>
+    <string name="campo_region">Municipio y departamento</string>
+    <string name="campo_oficio">Oficio artesanal</string>
+    <string name="campo_nombre_producto">Nombre del producto</string>
+    <string name="campo_precio">Precio (COP)</string>
+    <string name="campo_stock">Stock</string>
+    <string name="campo_categoria">Categoría</string>
+    <string name="campo_tecnica">Técnica y materiales</string>
+    <string name="campo_tiempo">Tiempo de elaboración</string>
+    <string name="campo_descripcion">Descripción</string>
+    <string name="campo_numero_tarjeta">Número de tarjeta</string>
+    <string name="campo_titular">Nombre del titular</string>
+    <string name="campo_vencimiento">MM/AA</string>
+    <string name="campo_cvv">CVV</string>
+    <string name="campo_banco">Banco (PSE)</string>
+    <string name="campo_celular_pago">Celular registrado en la billetera</string>
+    <string name="ayuda_clave">Mínimo 8 caracteres</string>
+    <string name="doc_cc">CC</string>
+
+    <!-- ===== Errores de validación ===== -->
+    <string name="error_email">Ingresa un correo válido</string>
+    <string name="error_email_existe">Este correo ya está registrado</string>
+    <string name="error_clave_vacia">Ingresa tu contraseña</string>
+    <string name="error_clave_corta">La contraseña debe tener mínimo 8 caracteres</string>
+    <string name="error_clave_no_coincide">Las contraseñas no coinciden</string>
+    <string name="error_credenciales">Correo o contraseña incorrectos</string>
+    <string name="error_suspendido">Tu cuenta está suspendida. Comunícate con soporte.</string>
+    <string name="error_nombres">Escribe tu nombre completo</string>
+    <string name="error_telefono">El celular debe tener 10 dígitos</string>
+    <string name="error_documento">Documento no válido</string>
+    <string name="error_autorizacion">Debes autorizar el tratamiento de datos para continuar</string>
+    <string name="error_codigo">Código incorrecto</string>
+    <string name="error_obligatorio">Campo obligatorio</string>
+    <string name="error_cupon">Cupón no válido</string>
+    <string name="error_tarjeta">Número de tarjeta no válido</string>
+    <string name="error_vencimiento">Usa el formato MM/AA</string>
+    <string name="error_cvv">CVV no válido</string>
+    <string name="error_banco">Selecciona tu banco</string>
+    <string name="error_terminos">Debes aceptar los términos y condiciones de compra</string>
+    <string name="error_sin_camara">No se encontró una aplicación de cámara</string>
+    <string name="error_nombre_producto">Mínimo 3 caracteres</string>
+    <string name="error_precio">Ingresa un precio mayor a cero</string>
+    <string name="error_stock">Ingresa la cantidad disponible</string>
+    <string name="error_categoria">Selecciona una categoría</string>
+    <string name="error_descripcion">Describe el producto (mínimo 10 caracteres)</string>
+    <string name="error_eliminar_propio">No puedes eliminar tu propia cuenta desde aquí</string>
+
+    <!-- ===== Login ===== -->
+    <string name="login_titulo">Bienvenido de nuevo</string>
+    <string name="login_subtitulo">Ingresa para descubrir artesanías de toda Colombia</string>
+    <string name="login_olvido">¿Olvidaste tu contraseña?</string>
+    <string name="login_ingresar">Iniciar sesión</string>
+    <string name="login_huella">Ingresar con huella</string>
+    <string name="login_huella_inactiva">Inicia sesión una vez para activarla</string>
+    <string name="login_huella_lista">Lista para %1$s</string>
+    <string name="login_huella_primero">Primero inicia sesión con tu contraseña para activar el ingreso con huella</string>
+    <string name="login_demo">Acceso rápido de demostración</string>
+    <string name="login_sin_cuenta">¿No tienes cuenta?</string>
+    <string name="login_registrate">Regístrate</string>
+    <string name="legal_habeas_data">Al continuar aceptas los Términos y la Política de Tratamiento de Datos Personales (Ley 1581 de 2012).</string>
+
+    <!-- ===== Biometría ===== -->
+    <string name="huella_titulo">Ingreso con huella</string>
+    <string name="huella_subtitulo_login">Toca el sensor para ingresar a ArtisTech</string>
+    <string name="huella_titulo_pago">Confirma tu pago</string>
+    <string name="huella_subtitulo_pago">Autoriza el pago de %1$s con tu huella</string>
+    <string name="huella_usar_clave">Usar contraseña</string>
+    <string name="huella_no_disponible">Este dispositivo no tiene una huella registrada. Configúrala en Ajustes &gt; Seguridad.</string>
+
+    <!-- ===== Registro ===== -->
+    <string name="registro_titulo">Crear cuenta</string>
+    <string name="registro_subtitulo">Únete a la comunidad que compra y vende lo hecho a mano.</string>
+    <string name="registro_rol">Quiero registrarme como</string>
+    <string name="registro_autorizacion">Autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012 y acepto la Política de Privacidad.</string>
+    <string name="registro_crear">Crear mi cuenta</string>
+    <string name="registro_exito_titulo">¡Cuenta creada!</string>
+    <string name="registro_exito_comprador">Ya puedes iniciar sesión y empezar a comprar.</string>
+    <string name="registro_exito_vendedor">Tu cuenta de vendedor quedó pendiente de verificación. El administrador revisará tus documentos.</string>
+
+    <!-- ===== Recuperar contraseña ===== -->
+    <string name="recuperar_titulo">Recuperar contraseña</string>
+    <string name="recuperar_paso_1">PASO 1 DE 2</string>
+    <string name="recuperar_paso_2">PASO 2 DE 2</string>
+    <string name="recuperar_instruccion_1">Escribe el correo con el que te registraste y te enviaremos un código de verificación.</string>
+    <string name="recuperar_instruccion_2">Si el correo %1$s está registrado, recibirás un código de 6 dígitos. (Demostración: usa %2$s)</string>
+    <string name="recuperar_enviar">Enviar código</string>
+    <string name="recuperar_restablecer">Restablecer contraseña</string>
+    <string name="recuperar_reenviar">Reenviar código</string>
+    <string name="recuperar_reenviado">Código reenviado (demostración: %1$s)</string>
+    <string name="recuperar_exito_titulo">Contraseña actualizada</string>
+    <string name="recuperar_exito_mensaje">Ya puedes iniciar sesión con tu nueva contraseña.</string>
+
+    <!-- ===== Inicio (Comprador) ===== -->
+    <string name="inicio_saludo">Hola, %1$s</string>
+    <string name="inicio_pregunta">¿Qué pieza artesanal buscas hoy?</string>
+    <string name="inicio_buscar">Buscar artesanías, regiones, técnicas…</string>
+    <string name="inicio_categorias">Categorías</string>
+    <string name="inicio_destacados">Destacados de la semana</string>
+    <string name="inicio_sin_notificaciones">No tienes notificaciones nuevas</string>
+    <string name="gps_titulo_inactivo">Descubre talleres cerca de ti</string>
+    <string name="gps_detalle_inactivo">Activa tu ubicación para ver productos locales</string>
+    <string name="gps_titulo_activo">Cerca de ti · Bogotá D.C.</string>
+    <string name="gps_detalle_activo">12 talleres a menos de 10 km · GPS activo</string>
+    <string name="gps_activar">Activar</string>
+    <string name="gps_denegado">Sin permiso de ubicación. Puedes elegir tu ciudad manualmente.</string>
+    <string name="promo_etiqueta">SEMANA DEL ARTESANO</string>
+    <string name="promo_titulo" formatted="false">10% de descuento</string>
+    <string name="promo_detalle">Usa el cupón ARTESANO10 en tu carrito</string>
+
+    <!-- ===== Categorías ===== -->
+    <string name="cat_tejidos">Tejidos</string>
+    <string name="cat_ceramica">Cerámica</string>
+    <string name="cat_cesteria">Cestería</string>
+    <string name="cat_joyeria">Joyería</string>
+    <string name="cat_madera">Madera</string>
+    <string name="cat_diseno">Diseño</string>
+
+    <!-- ===== Filtros ===== -->
+    <string name="filtro_todos">Todos</string>
+    <string name="filtro_publicados">Publicados</string>
+    <string name="filtro_revision">En revisión</string>
+    <string name="filtro_agotados">Agotados</string>
+    <string name="filtro_rechazados">Rechazados</string>
+    <string name="filtro_compradores">Compradores</string>
+    <string name="filtro_vendedores">Vendedores</string>
+    <string name="filtro_admins">Administradores</string>
+
+    <!-- ===== Catálogo ===== -->
+    <string name="catalogo_titulo">Catálogo</string>
+    <string name="catalogo_buscar">Buscar por nombre, región o técnica</string>
+    <string name="catalogo_vacio">No encontramos productos con esos filtros. Prueba con otra búsqueda.</string>
+
+    <!-- ===== Detalle de producto ===== -->
+    <string name="detalle_categoria">%1$s · Hecho a mano</string>
+    <string name="detalle_calificacion">%1$s (%2$d)</string>
+    <string name="detalle_iva">Precio total en COP, IVA incluido</string>
+    <string name="detalle_vendedor_region">%1$s · Vendedor verificado</string>
+    <string name="detalle_descripcion">Descripción</string>
+    <string name="detalle_ficha">Ficha técnica</string>
+    <string name="ficha_origen">Origen</string>
+    <string name="ficha_tecnica">Técnica</string>
+    <string name="ficha_elaboracion">Elaboración</string>
+    <string name="ficha_disponibles">Disponibles</string>
+    <string name="detalle_retracto">Envío a todo el país. Derecho de retracto de 5 días hábiles (Ley 1480 de 2011).</string>
+    <string name="detalle_agregar">Agregar al carrito</string>
+    <string name="detalle_agotado">Producto agotado</string>
+    <string name="detalle_max_stock">Solo hay %1$d unidades disponibles</string>
+    <string name="detalle_favorito_si">Agregado a favoritos</string>
+    <string name="detalle_favorito_no">Eliminado de favoritos</string>
+
+    <!-- ===== Carrito ===== -->
+    <string name="carrito_titulo">Mi carrito</string>
+    <string name="carrito_titulo_conteo">Mi carrito (%1$d)</string>
+    <string name="carrito_cupon">Cupón de descuento</string>
+    <string name="cupon_aplicado">Cupón aplicado: 10 por ciento de descuento</string>
+    <string name="carrito_retracto">Tienes 5 días hábiles para ejercer el derecho de retracto.</string>
+    <string name="carrito_continuar">Continuar al pago</string>
+    <string name="carrito_vacio_titulo">Tu carrito está vacío</string>
+    <string name="carrito_vacio_detalle">Explora el catálogo y apoya a los artesanos colombianos.</string>
+    <string name="carrito_explorar">Explorar catálogo</string>
+    <string name="resumen_subtotal">Subtotal</string>
+    <string name="resumen_descuento">Descuento</string>
+    <string name="resumen_envio">Envío</string>
+    <string name="resumen_iva">IVA incluido</string>
+    <string name="resumen_total">Total</string>
+
+    <!-- ===== Pasarela de pagos ===== -->
+    <string name="pago_titulo">Pasarela de pago</string>
+    <string name="paso_1">1</string>
+    <string name="paso_2">2</string>
+    <string name="paso_3">3</string>
+    <string name="paso_envio">Envío</string>
+    <string name="paso_pago">Pago</string>
+    <string name="paso_confirmacion">Confirmación</string>
+    <string name="pago_direccion">Dirección de envío</string>
+    <string name="pago_direccion_detalle">Detectada por GPS · Servientrega 3 a 5 días</string>
+    <string name="direccion_1">Cra. 15 # 93-47, Bogotá D.C.</string>
+    <string name="pago_metodo">Método de pago</string>
+    <string name="metodo_tarjeta">Tarjeta de crédito o débito</string>
+    <string name="metodo_pse">PSE · Débito bancario</string>
+    <string name="metodo_billetera">Nequi / Daviplata</string>
+    <string name="metodo_efectivo">Efectivo en corresponsal</string>
+    <string name="metodo_tarjeta_corto">Tarjeta</string>
+    <string name="metodo_pse_corto">PSE</string>
+    <string name="metodo_billetera_corto">Billetera móvil</string>
+    <string name="metodo_efectivo_corto">Efectivo</string>
+    <string name="pago_info_efectivo">Recibirás un código de pago para cancelar en Efecty o Baloto. El pedido se despacha cuando se confirme el pago.</string>
+    <string name="pago_resumen">Resumen de la compra</string>
+    <string name="pago_seguro">Pago procesado por una pasarela certificada PCI DSS. ArtisTech no almacena los datos de tu tarjeta.</string>
+    <string name="pago_terminos">Acepto los términos y condiciones de compra y la política de devoluciones.</string>
+    <string name="pago_pagar">Pagar</string>
+    <string name="pago_huella">Con huella</string>
+    <string name="pago_procesando">Procesando pago…</string>
+
+    <!-- ===== Confirmación ===== -->
+    <string name="confirmado_titulo">¡Pago aprobado!</string>
+    <string name="confirmado_codigo">Pedido %1$s</string>
+    <string name="confirmado_total">Total pagado</string>
+    <string name="confirmado_metodo">Método</string>
+    <string name="confirmado_entrega">Entrega estimada</string>
+    <string name="confirmado_entrega_valor">3 a 5 días hábiles</string>
+    <string name="confirmado_nota">Te enviamos el comprobante a tu correo. El taller ya recibió tu pedido.</string>
+    <string name="confirmado_seguir">Seguir comprando</string>
+    <string name="confirmado_ver_pedidos">Ver mis pedidos</string>
+
+    <!-- ===== Perfil ===== -->
+    <string name="perfil_datos">Datos personales</string>
+    <string name="perfil_email_ayuda">El correo no se puede modificar</string>
+    <string name="perfil_documento_valor">%1$s %2$s</string>
+    <string name="perfil_taller">Datos del taller</string>
+    <string name="perfil_preferencias">Preferencias</string>
+    <string name="perfil_notificaciones">Notificaciones promocionales</string>
+    <string name="perfil_notificaciones_ayuda">Solo en horarios permitidos por la Ley 2300 de 2023. Puedes desactivarlas cuando quieras.</string>
+    <string name="perfil_huella">Ingreso con huella</string>
+    <string name="perfil_huella_ayuda">Tu huella nunca sale del dispositivo.</string>
+    <string name="perfil_huella_activada">Ingreso con huella activado</string>
+    <string name="perfil_mis_pedidos">Mis pedidos</string>
+    <string name="perfil_mis_pedidos_conteo">Mis pedidos (%1$d)</string>
+    <string name="perfil_sin_pedidos">Aún no has realizado compras.</string>
+    <string name="perfil_guardar">Guardar cambios</string>
+    <string name="perfil_actualizado">Perfil actualizado</string>
+    <string name="perfil_eliminar">Eliminar mi cuenta</string>
+    <string name="perfil_eliminar_titulo">¿Eliminar tu cuenta?</string>
+    <string name="perfil_eliminar_mensaje">Se borrarán tus datos personales según tu derecho de supresión (Ley 1581 de 2012). Esta acción no se puede deshacer.</string>
+
+    <!-- ===== Vendedor ===== -->
+    <string name="vendedor_panel_subtitulo">Panel de productos y ventas</string>
+    <string name="vendedor_buscar">Buscar en mis productos</string>
+    <string name="vendedor_nuevo_producto">Nuevo producto</string>
+    <string name="vendedor_sin_productos">No hay productos con este filtro</string>
+    <string name="kpi_ventas_mes">Ventas acumuladas</string>
+    <string name="kpi_productos">Productos</string>
+    <string name="kpi_revision">En revisión</string>
+    <string name="kpi_publicados">Publicados</string>
+    <string name="kpi_total_productos">Total</string>
+    <string name="fila_stock">Stock: %1$d</string>
+    <string name="fila_precio_vendedor">%1$s · %2$s</string>
+    <string name="form_producto_nuevo">Nuevo producto</string>
+    <string name="form_producto_editar">Editar producto</string>
+    <string name="form_fotografia">Fotografía del producto</string>
+    <string name="form_tomar_foto">Tomar foto</string>
+    <string name="form_galeria">Galería</string>
+    <string name="form_estado_nuevo">Nuevo · pasará a revisión</string>
+    <string name="form_nota_moderacion">Los productos nuevos se publican cuando el administrador los aprueba.</string>
+    <string name="form_eliminar_producto">Eliminar producto</string>
+    <string name="producto_enviado_revision">Producto enviado a revisión</string>
+    <string name="producto_creado">Producto creado</string>
+    <string name="producto_actualizado">Producto actualizado</string>
+    <string name="producto_eliminado">Producto eliminado</string>
+    <string name="producto_aprobado">Producto aprobado y publicado</string>
+    <string name="producto_rechazado">Producto rechazado</string>
+    <string name="eliminar_producto_titulo">¿Eliminar producto?</string>
+    <string name="eliminar_producto_mensaje">Se eliminará «%1$s» del catálogo.</string>
+
+    <!-- ===== Pedidos ===== -->
+    <string name="pedidos_titulo">Pedidos recibidos</string>
+    <string name="pedidos_resumen">%1$d pedidos · %2$d por despachar</string>
+    <string name="pedidos_vacio">No hay pedidos con este estado</string>
+    <string name="pedidos_ayuda">Toca un pedido para actualizar su estado de envío</string>
+    <string name="pedido_info_vendedor">%1$s · %2$s</string>
+    <string name="pedido_info_comprador">%1$s · %2$s</string>
+    <string name="pedido_cambiar_estado">Estado del pedido %1$s</string>
+    <string name="pedido_estado_actualizado">Pedido marcado como: %1$s</string>
+    <string name="estado_por_despachar">Por despachar</string>
+    <string name="estado_en_transito">En tránsito</string>
+    <string name="estado_entregado">Entregados</string>
+
+    <!-- ===== Administrador ===== -->
+    <string name="admin_dashboard">Dashboard</string>
+    <string name="admin_usuarios">Usuarios</string>
+    <string name="admin_productos">Gestión de productos</string>
+    <string name="admin_productos_corto">Productos</string>
+    <string name="admin_reporte">Reporte de ventas</string>
+    <string name="admin_reporte_corto">Reportes</string>
+    <string name="admin_perfil">Mi perfil</string>
+    <string name="admin_productos_ayuda">Toca un producto para aprobarlo o rechazarlo.</string>
+    <string name="admin_productos_vacio">No hay productos en este estado</string>
+    <string name="dashboard_saludo">Hola, %1$s</string>
+    <string name="dashboard_subtitulo">Resumen general de la plataforma</string>
+    <string name="dashboard_alertas">Alertas del sistema</string>
+    <string name="dashboard_accesos">Accesos rápidos</string>
+    <string name="kpi_usuarios">Usuarios registrados</string>
+    <string name="kpi_vendedores">Vendedores</string>
+    <string name="kpi_ventas">Ventas totales</string>
+    <string name="kpi_pendientes">Pendientes</string>
+    <string name="alerta_moderacion_detalle">Revisa y aprueba los productos nuevos</string>
+    <string name="alerta_verificacion_detalle">RUT y documento cargados para revisión</string>
+    <string name="alerta_habeas">Solicitud de Habeas Data</string>
+    <string name="alerta_habeas_detalle">Usuario #5521 pide supresión · vence en 9 días hábiles</string>
+    <string name="moderar_mensaje">Vendedor: %1$s\nOrigen: %2$s\nPrecio: %3$s\nEstado actual: %4$s</string>
+    <string name="usuarios_buscar">Nombre, correo o documento</string>
+    <string name="usuarios_conteo">Mostrando %1$d de %2$d usuarios</string>
+    <string name="usuarios_nuevo">Nuevo usuario</string>
+    <string name="usuario_nuevo">Nuevo usuario</string>
+    <string name="usuario_editar">Editar usuario</string>
+    <string name="usuario_creado">Usuario creado</string>
+    <string name="usuario_actualizado">Usuario actualizado</string>
+    <string name="usuario_eliminado">Usuario eliminado</string>
+    <string name="usuario_eliminar">Eliminar usuario</string>
+    <string name="eliminar_usuario_titulo">¿Eliminar usuario?</string>
+    <string name="eliminar_usuario_mensaje">Se eliminará la cuenta de %1$s.</string>
+
+    <!-- ===== Reporte de ventas ===== -->
+    <string name="periodo_semana">Semana</string>
+    <string name="periodo_mes">Mes</string>
+    <string name="periodo_semestre">Semestre</string>
+    <string name="reporte_total">Ventas totales del periodo</string>
+    <string name="reporte_variacion">%1$s frente al periodo anterior</string>
+    <string name="reporte_pedidos">Pedidos</string>
+    <string name="reporte_ticket">Ticket promedio</string>
+    <string name="reporte_grafico">Ventas por periodo</string>
+    <string name="reporte_categorias">Ventas por categoría</string>
+    <string name="reporte_vendedores">Mejores vendedores</string>
+    <string name="reporte_nota">Las cifras por periodo son datos de demostración; las de categoría y vendedores se calculan con los pedidos registrados en la app.</string>
+    <string name="reporte_exportar">Exportar reporte (CSV)</string>
+    <string name="reporte_asunto">Reporte de ventas ArtisTech Colombia</string>
+
+    <!-- ===== Descripciones de contenido (accesibilidad / TalkBack) ===== -->
+    <string name="cd_logo">Logotipo de ArtisTech Colombia</string>
+    <string name="cd_huella">Huella dactilar</string>
+    <string name="cd_candado">Candado</string>
+    <string name="cd_notificaciones">Notificaciones</string>
+    <string name="cd_foto_producto">Fotografía del producto</string>
+    <string name="cd_volver">Volver</string>
+    <string name="cd_favorito">Agregar a favoritos</string>
+    <string name="cd_verificado">Vendedor verificado</string>
+    <string name="cd_restar">Restar una unidad</string>
+    <string name="cd_sumar">Sumar una unidad</string>
+    <string name="cd_eliminar">Eliminar</string>
+    <string name="cd_editar">Editar</string>
+    <string name="cd_confirmado">Pago confirmado</string>
+    <string name="cd_foto_perfil">Foto de perfil</string>
+    <string name="cd_tomar_foto">Tomar foto con la cámara</string>
+
+    <!-- ===== Plurales ===== -->
+    <plurals name="resultados">
+        <item quantity="one">%d producto encontrado</item>
+        <item quantity="other">%d productos encontrados</item>
+    </plurals>
+    <plurals name="unidades">
+        <item quantity="one">%d unidad</item>
+        <item quantity="other">%d unidades</item>
+    </plurals>
+    <plurals name="agregados">
+        <item quantity="one">%d unidad agregada al carrito</item>
+        <item quantity="other">%d unidades agregadas al carrito</item>
+    </plurals>
+    <plurals name="productos_resumen">
+        <item quantity="one">Productos (%d)</item>
+        <item quantity="other">Productos (%d)</item>
+    </plurals>
+    <plurals name="alerta_moderacion">
+        <item quantity="one">%d producto pendiente de moderación</item>
+        <item quantity="other">%d productos pendientes de moderación</item>
+    </plurals>
+    <plurals name="alerta_verificacion">
+        <item quantity="one">%d vendedor por verificar</item>
+        <item quantity="other">%d vendedores por verificar</item>
+    </plurals>
+
+    <!-- ===== Listas ===== -->
+    <string-array name="tipos_documento">
+        <item>CC</item>
+        <item>CE</item>
+        <item>NIT</item>
+        <item>Pasaporte</item>
+    </string-array>
+    <string-array name="bancos_pse">
+        <item>Bancolombia</item>
+        <item>Banco de Bogotá</item>
+        <item>Davivienda</item>
+        <item>BBVA Colombia</item>
+        <item>Banco Popular</item>
+        <item>Nu Colombia</item>
+    </string-array>
+    <string-array name="direcciones_envio">
+        <item>Cra. 15 # 93-47, Bogotá D.C.</item>
+        <item>Av. Calle 32 # 17-30, Bogotá D.C.</item>
+        <item>Calle 10 # 4-21, Villa de Leyva, Boyacá</item>
+    </string-array>
+</resources>

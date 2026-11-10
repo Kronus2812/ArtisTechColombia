@@ -78,7 +78,7 @@ app/src/main/
 
 ## Cómo ejecutar
 
-1. Clonar: `git clone https://github.com/<tu-usuario>/ArtisTechColombia.git`
+1. Clonar: `git clone https://github.com/Kronus2812/ArtisTechColombia.git`
 2. Abrir la carpeta en **Android Studio** y esperar la sincronización de Gradle.
 3. Ejecutar ▶ en un emulador o dispositivo con Android 8.0 o superior.
 4. Generar el APK: **Build → Generate App Bundles or APKs → Generate APKs**. El archivo queda en `app/build/outputs/apk/debug/app-debug.apk`.

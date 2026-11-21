@@ -26,6 +26,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvTitulo"
         android:layout_marginTop="@dimen/espacio_xl"
         android:text="@string/confirmado_titulo"
         android:textAppearance="@style/TextAppearance.ArtisTech.Display" />
@@ -47,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/espacio_l"
+            android:shrinkColumns="1"
             android:stretchColumns="1">
 
             <TableRow>
@@ -57,6 +59,21 @@
             <TableRow>
                 <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_metodo" />
                 <TextView android:id="@+id/tvMetodo" style="@style/Widget.ArtisTech.ValorResumen" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_estado_pago" />
+                <TextView android:id="@+id/tvEstadoPago" style="@style/Widget.ArtisTech.ValorResumen" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_referencia" />
+                <TextView android:id="@+id/tvReferencia" style="@style/Widget.ArtisTech.ValorResumen" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/Widget.ArtisTech.FilaResumen" android:text="@string/confirmado_direccion" />
+                <TextView android:id="@+id/tvDireccionEntrega" style="@style/Widget.ArtisTech.ValorResumen" />
             </TableRow>
 
             <TableRow>

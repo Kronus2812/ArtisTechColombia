@@ -348,5 +348,15 @@
                 android:text="@string/admin_perfil"
                 app:icon="@drawable/ic_perfil" />
         </GridLayout>
+
+        <!-- Carga inicial de la base de datos: catálogo de ejemplo en Firestore -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCargarCatalogo"
+            style="@style/Widget.ArtisTech.Button.Texto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacio_m"
+            android:text="@string/dashboard_cargar_catalogo"
+            app:icon="@drawable/ic_descargar" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

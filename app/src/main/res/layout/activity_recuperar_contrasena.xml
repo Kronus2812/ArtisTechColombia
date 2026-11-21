@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Recuperación de contraseña (RF-04) en dos pasos: correo y código + nueva contraseña. -->
+<!-- Recuperación de contraseña (RF-04) con Firebase Authentication: paso 1 correo, paso 2 confirmación del envío del enlace. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/raiz"
@@ -89,61 +89,13 @@
                     android:text="@string/recuperar_enviar" />
             </LinearLayout>
 
-            <!-- Paso 2: código y nueva contraseña -->
+            <!-- Paso 2: confirmación del envío del enlace de Firebase -->
             <LinearLayout
                 android:id="@+id/pasoCodigo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="gone">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilCodigo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/campo_codigo"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="6">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etCodigo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:letterSpacing="0.4"
-                        android:maxLength="6" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilNuevaClave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/campo_nueva_clave"
-                    app:endIconMode="password_toggle"
-                    app:helperText="@string/ayuda_clave"
-                    app:startIconDrawable="@drawable/ic_candado">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etNuevaClave"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilConfirmar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/campo_confirmar_clave"
-                    app:endIconMode="password_toggle"
-                    app:startIconDrawable="@drawable/ic_candado">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etConfirmar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRestablecer"

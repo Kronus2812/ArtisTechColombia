@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Conexión con Firebase (Auth, Firestore, Storage) y con la pasarela ePayco -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <!-- Hardware y permisos (Actividad 2: cámara, GPS y huella) -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -14,8 +19,11 @@
     <uses-feature
         android:name="android.hardware.location"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
 
-    <!-- Visibilidad de la app de cámara para ActivityResultContracts.TakePicturePreview -->
+    <!-- Visibilidad de la app de cámara para ActivityResultContracts.TakePicture / TakePicturePreview -->
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -66,6 +74,9 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".ui.comprador.EpaycoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.comprador.PedidoConfirmadoActivity"
             android:exported="false" />
 
@@ -88,5 +99,16 @@
             android:name=".ui.admin.UsuarioFormActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Comparte con la app de cámara un archivo temporal para la foto a resolución completa -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 </manifest>

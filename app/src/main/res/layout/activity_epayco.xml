@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Checkout oficial de ePayco cargado en un WebView. La app intercepta la URL de respuesta
+     para confirmar la transacción. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_atras"
+        app:subtitle="@string/epayco_subtitulo"
+        app:title="@string/epayco_titulo" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progreso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/terracota" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Capa que se muestra mientras se valida la transacción con ePayco -->
+        <LinearLayout
+            android:id="@+id/capaValidando"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/velo_oscuro"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/mostaza"
+                app:indicatorSize="@dimen/icono_xl"
+                app:trackThickness="@dimen/grosor_progreso_medio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacio_l"
+                android:text="@string/epayco_validando"
+                android:textAppearance="@style/TextAppearance.ArtisTech.Subtitulo"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

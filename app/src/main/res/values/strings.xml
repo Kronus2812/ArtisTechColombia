@@ -13,7 +13,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="eliminar">Eliminar</string>
     <string name="aplicar">Aplicar</string>
-    <string name="cambiar">Cambiar</string>
     <string name="entendido">Entendido</string>
     <string name="salir">Salir</string>
     <string name="aprobar">Aprobar</string>
@@ -26,7 +25,6 @@
     <string name="valor_negativo">−%1$s</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
     <string name="cerrar_sesion_mensaje">¿Deseas cerrar tu sesión de administrador?</string>
-    <string name="ir_a_ingresar">Ir a iniciar sesión</string>
     <string name="iniciales_nuevo">+</string>
 
     <!-- ===== Roles ===== -->
@@ -49,12 +47,10 @@
     <string name="campo_clave">Contraseña</string>
     <string name="campo_clave_temporal">Contraseña temporal</string>
     <string name="campo_confirmar_clave">Confirmar contraseña</string>
-    <string name="campo_nueva_clave">Nueva contraseña</string>
     <string name="campo_nombres">Nombres y apellidos</string>
     <string name="campo_telefono">Celular</string>
     <string name="campo_tipo_doc">Tipo</string>
     <string name="campo_documento">Número de documento</string>
-    <string name="campo_codigo">Código de verificación</string>
     <string name="campo_rol">Rol</string>
     <string name="campo_estado">Estado de la cuenta</string>
     <string name="campo_taller">Nombre del taller</string>
@@ -68,12 +64,6 @@
     <string name="campo_tecnica">Técnica y materiales</string>
     <string name="campo_tiempo">Tiempo de elaboración</string>
     <string name="campo_descripcion">Descripción</string>
-    <string name="campo_numero_tarjeta">Número de tarjeta</string>
-    <string name="campo_titular">Nombre del titular</string>
-    <string name="campo_vencimiento">MM/AA</string>
-    <string name="campo_cvv">CVV</string>
-    <string name="campo_banco">Banco (PSE)</string>
-    <string name="campo_celular_pago">Celular registrado en la billetera</string>
     <string name="ayuda_clave">Mínimo 8 caracteres</string>
     <string name="doc_cc">CC</string>
 
@@ -89,13 +79,8 @@
     <string name="error_telefono">El celular debe tener 10 dígitos</string>
     <string name="error_documento">Documento no válido</string>
     <string name="error_autorizacion">Debes autorizar el tratamiento de datos para continuar</string>
-    <string name="error_codigo">Código incorrecto</string>
     <string name="error_obligatorio">Campo obligatorio</string>
     <string name="error_cupon">Cupón no válido</string>
-    <string name="error_tarjeta">Número de tarjeta no válido</string>
-    <string name="error_vencimiento">Usa el formato MM/AA</string>
-    <string name="error_cvv">CVV no válido</string>
-    <string name="error_banco">Selecciona tu banco</string>
     <string name="error_terminos">Debes aceptar los términos y condiciones de compra</string>
     <string name="error_sin_camara">No se encontró una aplicación de cámara</string>
     <string name="error_nombre_producto">Mínimo 3 caracteres</string>
@@ -111,7 +96,7 @@
     <string name="login_olvido">¿Olvidaste tu contraseña?</string>
     <string name="login_ingresar">Iniciar sesión</string>
     <string name="login_huella">Ingresar con huella</string>
-    <string name="login_huella_inactiva">Inicia sesión una vez para activarla</string>
+    <string name="login_huella_inactiva">Inicia sesión una vez con tu contraseña para activarla</string>
     <string name="login_huella_lista">Lista para %1$s</string>
     <string name="login_huella_primero">Primero inicia sesión con tu contraseña para activar el ingreso con huella</string>
     <string name="login_demo">Acceso rápido de demostración</string>
@@ -141,14 +126,12 @@
     <string name="recuperar_titulo">Recuperar contraseña</string>
     <string name="recuperar_paso_1">PASO 1 DE 2</string>
     <string name="recuperar_paso_2">PASO 2 DE 2</string>
-    <string name="recuperar_instruccion_1">Escribe el correo con el que te registraste y te enviaremos un código de verificación.</string>
-    <string name="recuperar_instruccion_2">Si el correo %1$s está registrado, recibirás un código de 6 dígitos. (Demostración: usa %2$s)</string>
-    <string name="recuperar_enviar">Enviar código</string>
-    <string name="recuperar_restablecer">Restablecer contraseña</string>
-    <string name="recuperar_reenviar">Reenviar código</string>
-    <string name="recuperar_reenviado">Código reenviado (demostración: %1$s)</string>
-    <string name="recuperar_exito_titulo">Contraseña actualizada</string>
-    <string name="recuperar_exito_mensaje">Ya puedes iniciar sesión con tu nueva contraseña.</string>
+    <string name="recuperar_instruccion_1">Escribe el correo con el que te registraste y te enviaremos un enlace seguro para crear una nueva contraseña.</string>
+    <string name="recuperar_instruccion_2">Si %1$s está registrado, recibirás un correo de ArtisTech (Firebase) con un enlace para crear tu nueva contraseña. Revisa también la carpeta de spam.</string>
+    <string name="recuperar_enviar">Enviar enlace</string>
+    <string name="recuperar_restablecer">Volver a iniciar sesión</string>
+    <string name="recuperar_reenviar">Reenviar correo</string>
+    <string name="recuperar_reenviado">Te enviamos de nuevo el enlace de recuperación</string>
 
     <!-- ===== Inicio (Comprador) ===== -->
     <string name="inicio_saludo">Hola, %1$s</string>
@@ -159,8 +142,6 @@
     <string name="inicio_sin_notificaciones">No tienes notificaciones nuevas</string>
     <string name="gps_titulo_inactivo">Descubre talleres cerca de ti</string>
     <string name="gps_detalle_inactivo">Activa tu ubicación para ver productos locales</string>
-    <string name="gps_titulo_activo">Cerca de ti · Bogotá D.C.</string>
-    <string name="gps_detalle_activo">12 talleres a menos de 10 km · GPS activo</string>
     <string name="gps_activar">Activar</string>
     <string name="gps_denegado">Sin permiso de ubicación. Puedes elegir tu ciudad manualmente.</string>
     <string name="promo_etiqueta">SEMANA DEL ARTESANO</string>
@@ -233,20 +214,10 @@
     <string name="paso_pago">Pago</string>
     <string name="paso_confirmacion">Confirmación</string>
     <string name="pago_direccion">Dirección de envío</string>
-    <string name="pago_direccion_detalle">Detectada por GPS · Servientrega 3 a 5 días</string>
-    <string name="direccion_1">Cra. 15 # 93-47, Bogotá D.C.</string>
+    <string name="pago_direccion_detalle">Usa el GPS o escribe la dirección de entrega</string>
     <string name="pago_metodo">Método de pago</string>
-    <string name="metodo_tarjeta">Tarjeta de crédito o débito</string>
-    <string name="metodo_pse">PSE · Débito bancario</string>
-    <string name="metodo_billetera">Nequi / Daviplata</string>
-    <string name="metodo_efectivo">Efectivo en corresponsal</string>
-    <string name="metodo_tarjeta_corto">Tarjeta</string>
-    <string name="metodo_pse_corto">PSE</string>
-    <string name="metodo_billetera_corto">Billetera móvil</string>
-    <string name="metodo_efectivo_corto">Efectivo</string>
-    <string name="pago_info_efectivo">Recibirás un código de pago para cancelar en Efecty o Baloto. El pedido se despacha cuando se confirme el pago.</string>
     <string name="pago_resumen">Resumen de la compra</string>
-    <string name="pago_seguro">Pago procesado por una pasarela certificada PCI DSS. ArtisTech no almacena los datos de tu tarjeta.</string>
+    <string name="pago_seguro">Pago procesado por ePayco, pasarela certificada PCI DSS. ArtisTech no ve ni almacena los datos de tu tarjeta.</string>
     <string name="pago_terminos">Acepto los términos y condiciones de compra y la política de devoluciones.</string>
     <string name="pago_pagar">Pagar</string>
     <string name="pago_huella">Con huella</string>
@@ -259,7 +230,7 @@
     <string name="confirmado_metodo">Método</string>
     <string name="confirmado_entrega">Entrega estimada</string>
     <string name="confirmado_entrega_valor">3 a 5 días hábiles</string>
-    <string name="confirmado_nota">Te enviamos el comprobante a tu correo. El taller ya recibió tu pedido.</string>
+    <string name="confirmado_nota">Tu pedido quedó registrado y el taller ya lo puede ver en su panel.</string>
     <string name="confirmado_seguir">Seguir comprando</string>
     <string name="confirmado_ver_pedidos">Ver mis pedidos</string>
 
@@ -371,7 +342,7 @@
     <string name="reporte_grafico">Ventas por periodo</string>
     <string name="reporte_categorias">Ventas por categoría</string>
     <string name="reporte_vendedores">Mejores vendedores</string>
-    <string name="reporte_nota">Las cifras por periodo son datos de demostración; las de categoría y vendedores se calculan con los pedidos registrados en la app.</string>
+    <string name="reporte_nota">Todas las cifras se calculan en tiempo real con los pedidos registrados en Firestore (se excluyen los cancelados).</string>
     <string name="reporte_exportar">Exportar reporte (CSV)</string>
     <string name="reporte_asunto">Reporte de ventas ArtisTech Colombia</string>
 
@@ -418,24 +389,67 @@
         <item quantity="other">%d vendedores por verificar</item>
     </plurals>
 
+    <!-- ===== Backend: Firebase, geolocalización y ePayco (Actividad 6) ===== -->
+    <string name="ingresando">Ingresando…</string>
+    <string name="creando_cuenta">Creando cuenta…</string>
+    <string name="guardando">Guardando…</string>
+    <string name="activar">Activar</string>
+    <string name="editar">Editar</string>
+    <string name="reintentar">Reintentar</string>
+    <string name="error_perfil_inexistente">Esta cuenta fue eliminada o no tiene perfil. Comunícate con el administrador.</string>
+    <string name="error_red">Sin conexión a internet. Revisa tu red e inténtalo de nuevo.</string>
+    <string name="error_permiso">No tienes permiso para esta operación (reglas de seguridad de Firestore).</string>
+    <string name="error_generico">Ocurrió un error inesperado. Inténtalo de nuevo.</string>
+    <string name="error_foto">No fue posible leer la foto seleccionada.</string>
+    <string name="error_direccion">Indica la dirección de entrega (usa el GPS o escríbela).</string>
+    <string name="gps_buscando">Buscando tu ubicación…</string>
+    <string name="gps_apagado">No se pudo obtener la ubicación. Enciende el GPS del teléfono e inténtalo de nuevo.</string>
+    <string name="gps_titulo_entrega">Entregas en tu ubicación · GPS activo</string>
+    <string name="gps_detalle_direccion">%1$s · Toca para ver en el mapa</string>
+    <string name="mapa_mi_ubicacion">Mi ubicación</string>
+    <string name="mapa_entrega">Dirección de entrega</string>
+    <string name="pago_sin_direccion">Sin dirección de entrega</string>
+    <string name="pago_usar_gps">Usar GPS</string>
+    <string name="pago_ver_mapa">Ver mapa</string>
+    <string name="pago_editar_direccion">Dirección de entrega</string>
+    <string name="pago_direccion_gps">Detectada por GPS (%1$s) · Envío 3 a 5 días</string>
+    <string name="pago_direccion_manual">Dirección escrita a mano · Envío 3 a 5 días</string>
+    <string name="metodo_epayco">ePayco · Tarjeta, PSE, Nequi o Daviplata</string>
+    <string name="metodo_contra_entrega">Pago contra entrega</string>
+    <string name="metodo_contra_entrega_corto">Contra entrega</string>
+    <string name="estado_pago_contra_entrega">Pago al recibir</string>
+    <string name="pago_info_epayco">Se abrirá el checkout seguro de ePayco (modo pruebas). Al terminar, la app confirma la transacción con ePayco y registra tu pedido.</string>
+    <string name="pago_info_contra_entrega">Pagas en efectivo al recibir el pedido. El taller despacha en cuanto confirme la compra.</string>
+    <string name="pago_cancelado">Pago cancelado. Tu carrito sigue guardado.</string>
+    <string name="pago_rechazado_titulo">Pago no aprobado</string>
+    <string name="pago_rechazado_mensaje">ePayco respondió: %1$s (referencia %2$s). No se registró ningún pedido; puedes intentarlo de nuevo.</string>
+    <string name="epayco_titulo">Pago seguro</string>
+    <string name="epayco_subtitulo">Checkout ePayco</string>
+    <string name="epayco_validando">Confirmando la transacción con ePayco…</string>
+    <string name="epayco_salir_titulo">¿Salir del pago?</string>
+    <string name="epayco_salir_mensaje">Si sales ahora, la compra no se registrará.</string>
+    <string name="epayco_error_titulo">No se pudo abrir ePayco</string>
+    <string name="epayco_error_mensaje">Revisa tu conexión a internet e inténtalo de nuevo. Detalle: %1$s</string>
+    <string name="confirmado_titulo_pendiente">Pago en proceso</string>
+    <string name="confirmado_titulo_registrado">¡Pedido registrado!</string>
+    <string name="confirmado_estado_pago">Estado del pago</string>
+    <string name="confirmado_referencia">Referencia ePayco</string>
+    <string name="confirmado_direccion">Entrega en</string>
+    <string name="pedido_ver_mapa">Ver entrega</string>
+    <string name="perfil_huella_confirmar">Confirma tu contraseña para activar la huella</string>
+    <string name="usuario_email_fijo">El correo es la credencial de acceso y no se modifica</string>
+    <string name="dashboard_cargar_catalogo">Cargar catálogo de ejemplo en Firestore</string>
+    <string name="dashboard_elegir_vendedor">¿A qué vendedor se asigna el catálogo?</string>
+    <string name="dashboard_sin_vendedores">Primero registra al menos un vendedor.</string>
+    <string name="dashboard_catalogo_cargado">Se cargaron %1$d productos en Firestore</string>
+    <string name="reporte_semana_n">Sem %1$d</string>
+    <string name="reporte_nuevo">Nuevo</string>
+
     <!-- ===== Listas ===== -->
     <string-array name="tipos_documento">
         <item>CC</item>
         <item>CE</item>
         <item>NIT</item>
         <item>Pasaporte</item>
-    </string-array>
-    <string-array name="bancos_pse">
-        <item>Bancolombia</item>
-        <item>Banco de Bogotá</item>
-        <item>Davivienda</item>
-        <item>BBVA Colombia</item>
-        <item>Banco Popular</item>
-        <item>Nu Colombia</item>
-    </string-array>
-    <string-array name="direcciones_envio">
-        <item>Cra. 15 # 93-47, Bogotá D.C.</item>
-        <item>Av. Calle 32 # 17-30, Bogotá D.C.</item>
-        <item>Calle 10 # 4-21, Villa de Leyva, Boyacá</item>
     </string-array>
 </resources>

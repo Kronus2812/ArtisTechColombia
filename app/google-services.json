@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553355678724",
+    "project_id": "artistechcolombia",
+    "storage_bucket": "artistechcolombia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553355678724:android:e7650bbb3b6aede87c9151",
+        "android_client_info": {
+          "package_name": "com.artistech.colombia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsbOTAx38qKRuXsUaumCj2Ja5mcLps8SM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

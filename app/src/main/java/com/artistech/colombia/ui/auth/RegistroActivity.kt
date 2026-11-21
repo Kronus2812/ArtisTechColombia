@@ -11,13 +11,20 @@ import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.data.Rol
 import com.artistech.colombia.data.Usuario
 import com.artistech.colombia.databinding.ActivityRegistroBinding
+import com.artistech.colombia.util.mensajeError
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
-/** Registro de Compradores y Vendedores con autorización de tratamiento de datos (Ley 1581). */
+/**
+ * Registro de Compradores y Vendedores (RF-01) con autorización de tratamiento de datos
+ * (Ley 1581 de 2012). Crea la cuenta en Firebase Authentication y el perfil en Firestore.
+ */
 class RegistroActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityRegistroBinding
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityRegistroBinding.inflate(layoutInflater)
@@ -30,6 +37,7 @@ class RegistroActivity : AppCompatActivity() {
         b.btnCrearCuenta.setOnClickListener { crearCuenta() }
     }
 
+    /** Valida todos los campos del formulario y, si son correctos, crea la cuenta en Firebase. */
     private fun crearCuenta() {
         val nombres = b.etNombres.text?.toString()?.trim().orEmpty()
         val email = b.etEmail.text?.toString()?.trim().orEmpty()
@@ -43,11 +51,7 @@ class RegistroActivity : AppCompatActivity() {
 
         var valido = true
         if (nombres.length < 3) { b.tilNombres.error = getString(R.string.error_nombres); valido = false }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            b.tilEmail.error = getString(R.string.error_email); valido = false
-        } else if (!Repositorio.emailDisponible(email)) {
-            b.tilEmail.error = getString(R.string.error_email_existe); valido = false
-        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) { b.tilEmail.error = getString(R.string.error_email); valido = false }
         if (telefono.length != 10) { b.tilTelefono.error = getString(R.string.error_telefono); valido = false }
         if (documento.length < 5) { b.tilDocumento.error = getString(R.string.error_documento); valido = false }
         if (clave.length < 8) { b.tilClave.error = getString(R.string.error_clave_corta); valido = false }
@@ -56,21 +60,38 @@ class RegistroActivity : AppCompatActivity() {
         if (!valido) return
 
         val esVendedor = b.grupoRol.checkedButtonId == R.id.btnRolVendedor
-        Repositorio.guardarUsuario(
-            Usuario(
-                id = 0,
-                nombres = nombres,
-                email = email,
-                telefono = telefono,
-                tipoDocumento = b.actTipoDoc.text.toString(),
-                numeroDocumento = documento,
-                rol = if (esVendedor) Rol.VENDEDOR else Rol.COMPRADOR,
-                // Los vendedores quedan pendientes hasta que el Administrador verifique sus documentos
-                estado = if (esVendedor) EstadoUsuario.PENDIENTE else EstadoUsuario.ACTIVO,
-                contrasena = clave
-            )
+        val datos = Usuario(
+            id = "",
+            nombres = nombres,
+            email = email,
+            telefono = telefono,
+            tipoDocumento = b.actTipoDoc.text.toString(),
+            numeroDocumento = documento,
+            rol = if (esVendedor) Rol.VENDEDOR else Rol.COMPRADOR,
+            // Los vendedores quedan pendientes hasta que el Administrador verifique sus documentos
+            estado = if (esVendedor) EstadoUsuario.PENDIENTE else EstadoUsuario.ACTIVO
         )
 
+        b.btnCrearCuenta.isEnabled = false
+        b.btnCrearCuenta.setText(R.string.creando_cuenta)
+        Repositorio.registrar(datos, clave) { resultado ->
+            b.btnCrearCuenta.isEnabled = true
+            b.btnCrearCuenta.setText(R.string.registro_crear)
+            resultado
+                .onSuccess { mostrarExito(esVendedor) }
+                .onFailure { error ->
+                    // El correo repetido se marca directamente en su campo
+                    if (error is FirebaseAuthUserCollisionException) {
+                        b.tilEmail.error = getString(R.string.error_email_existe)
+                    } else {
+                        Snackbar.make(b.root, mensajeError(error), Snackbar.LENGTH_LONG).show()
+                    }
+                }
+        }
+    }
+
+    /** Diálogo de confirmación; al cerrarlo vuelve al inicio de sesión. */
+    private fun mostrarExito(esVendedor: Boolean) {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.registro_exito_titulo)
             .setMessage(if (esVendedor) R.string.registro_exito_vendedor else R.string.registro_exito_comprador)

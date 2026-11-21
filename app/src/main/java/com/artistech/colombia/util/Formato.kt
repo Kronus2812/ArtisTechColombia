@@ -23,6 +23,10 @@ object Formato {
     /** Fecha corta a partir de milisegundos: 1763600000000 -> "19/11/2025" */
     fun fecha(millis: Long): String = SimpleDateFormat("dd/MM/yyyy", localeColombia).format(Date(millis))
 
+    /** Coordenadas GPS con 5 decimales (precisión ≈ 1 m): "4.65312, -74.08371" */
+    fun coordenadas(latitud: Double, longitud: Double): String =
+        String.format(Locale.US, "%.5f, %.5f", latitud, longitud)
+
     /** Un decimal con coma: 4.85 -> "4,9" */
     fun decimal(valor: Double): String = String.format(localeColombia, "%.1f", valor)
 

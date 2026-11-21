@@ -1,6 +1,8 @@
 package com.artistech.colombia.util
 
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 /** Formatos regionales para Colombia (RNF-10): pesos sin decimales y punto como separador de miles. */
@@ -18,6 +20,10 @@ object Formato {
         else -> valor.toString()
     }
 
+    /** Fecha corta a partir de milisegundos: 1763600000000 -> "19/11/2025" */
+    fun fecha(millis: Long): String = SimpleDateFormat("dd/MM/yyyy", localeColombia).format(Date(millis))
+
+    /** Un decimal con coma: 4.85 -> "4,9" */
     fun decimal(valor: Double): String = String.format(localeColombia, "%.1f", valor)
 
     /** Oculta parte del correo: laura@correo.co -> l•••@correo.co */

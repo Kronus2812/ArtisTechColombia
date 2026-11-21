@@ -6,12 +6,15 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
+import android.view.MenuItem
 import android.webkit.CookieManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.FrameLayout
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -22,6 +25,8 @@ import com.artistech.colombia.databinding.ActivityEpaycoBinding
 import com.artistech.colombia.util.PagoEpayco
 import com.artistech.colombia.util.ResultadoPago
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 /**
  * Checkout de ePayco dentro de la app.
@@ -45,6 +50,12 @@ class EpaycoActivity : AppCompatActivity() {
         b = ActivityEpaycoBinding.inflate(layoutInflater)
         setContentView(b.root)
         b.toolbar.setNavigationOnClickListener { confirmarSalida() }
+        // Botón "Ya pagué": respaldo si el banco (p. ej. Verified by Visa) no regresa a la app
+        b.toolbar.menu.add(0, MENU_YA_PAGUE, 0, R.string.epayco_ya_pague)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        b.toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == MENU_YA_PAGUE) { pedirReferencia(); true } else false
+        }
         onBackPressedDispatcher.addCallback(this) {
             if (b.webView.canGoBack()) b.webView.goBack() else confirmarSalida()
         }
@@ -146,6 +157,36 @@ class EpaycoActivity : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * Respaldo para cuando la página del banco no redirige de vuelta a la app: el usuario escribe
+     * la referencia ePayco que recibió por correo y la app confirma la transacción con ePayco.
+     */
+    private fun pedirReferencia() {
+        val campo = TextInputEditText(this).apply { inputType = InputType.TYPE_CLASS_NUMBER }
+        val contenedor = TextInputLayout(this).apply {
+            hint = getString(R.string.epayco_referencia_hint)
+            addView(campo)
+        }
+        val marco = FrameLayout(this).apply {
+            val m = resources.getDimensionPixelSize(R.dimen.espacio_l)
+            setPadding(m, m / 2, m, 0)
+            addView(contenedor)
+        }
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.epayco_ya_pague)
+            .setMessage(R.string.epayco_referencia_mensaje)
+            .setView(marco)
+            .setNegativeButton(R.string.cancelar, null)
+            .setPositiveButton(R.string.epayco_verificar) { _, _ ->
+                val referencia = campo.text?.toString()?.trim().orEmpty()
+                if (referencia.isNotEmpty() && !respuestaProcesada) {
+                    respuestaProcesada = true
+                    validar(referencia, emptyMap())
+                }
+            }
+            .show()
+    }
+
     /** Pregunta antes de abandonar el pago. */
     private fun confirmarSalida() {
         MaterialAlertDialogBuilder(this)
@@ -197,5 +238,6 @@ class EpaycoActivity : AppCompatActivity() {
         const val EXTRA_ESTADO = "estado"
         const val EXTRA_REFERENCIA = "referencia"
         const val EXTRA_FRANQUICIA = "franquicia"
+        private const val MENU_YA_PAGUE = 1
     }
 }

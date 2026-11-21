@@ -425,6 +425,10 @@
     <string name="pago_rechazado_mensaje">ePayco respondió: %1$s (referencia %2$s). No se registró ningún pedido; puedes intentarlo de nuevo.</string>
     <string name="epayco_titulo">Pago seguro</string>
     <string name="epayco_subtitulo">Checkout ePayco</string>
+    <string name="epayco_ya_pague">Ya pagué</string>
+    <string name="epayco_verificar">Verificar</string>
+    <string name="epayco_referencia_hint">Referencia ePayco</string>
+    <string name="epayco_referencia_mensaje">Si el banco no te regresó a la app, escribe la referencia ePayco que llegó a tu correo para confirmar el pago.</string>
     <string name="epayco_validando">Confirmando la transacción con ePayco…</string>
     <string name="epayco_salir_titulo">¿Salir del pago?</string>
     <string name="epayco_salir_mensaje">Si sales ahora, la compra no se registrará.</string>

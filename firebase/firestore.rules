@@ -1,0 +1,68 @@
+rules_version = '2';
+
+// Reglas de seguridad de Cloud Firestore para ArtisTech Colombia.
+// Copiar y publicar en: Consola de Firebase > Firestore Database > Reglas.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Funciones auxiliares ----------
+    function autenticado() {
+      return request.auth != null;
+    }
+    function esDueno(uid) {
+      return autenticado() && request.auth.uid == uid;
+    }
+    function perfil() {
+      return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data;
+    }
+    function esAdmin() {
+      return autenticado()
+        && exists(/databases/$(database)/documents/usuarios/$(request.auth.uid))
+        && perfil().rol == 'ADMIN';
+    }
+
+    // ---------- Usuarios (perfil) ----------
+    match /usuarios/{uid} {
+      // Cada persona lee su perfil; el Administrador lee todos
+      allow read: if esDueno(uid) || esAdmin();
+      // Registro propio solo como Comprador o Vendedor; el Administrador crea cualquier rol
+      allow create: if (esDueno(uid) && request.resource.data.rol in ['COMPRADOR', 'VENDEDOR']) || esAdmin();
+      // La persona edita su perfil, pero no puede cambiarse el rol ni el estado
+      allow update: if esAdmin()
+        || (esDueno(uid)
+            && request.resource.data.rol == resource.data.rol
+            && request.resource.data.estado == resource.data.estado);
+      allow delete: if esDueno(uid) || esAdmin();
+
+      // Carrito persistente: solo su dueño lo lee y escribe
+      match /carrito/{productoId} {
+        allow read, write: if esDueno(uid);
+      }
+    }
+
+    // ---------- Productos ----------
+    match /productos/{productoId} {
+      allow read: if autenticado();
+      allow create: if esAdmin() || (autenticado() && request.resource.data.vendedorId == request.auth.uid);
+      // El dueño o el Administrador editan todo; un Comprador solo puede descontar stock al comprar
+      allow update: if esAdmin()
+        || (autenticado() && resource.data.vendedorId == request.auth.uid)
+        || (autenticado()
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stock', 'estado'])
+            && request.resource.data.stock < resource.data.stock
+            && request.resource.data.stock >= 0);
+      allow delete: if esAdmin() || (autenticado() && resource.data.vendedorId == request.auth.uid);
+    }
+
+    // ---------- Pedidos (órdenes) ----------
+    match /pedidos/{pedidoId} {
+      allow read: if esAdmin()
+        || (autenticado() && (resource.data.compradorId == request.auth.uid
+                              || resource.data.vendedorId == request.auth.uid));
+      allow create: if autenticado() && request.resource.data.compradorId == request.auth.uid;
+      // El Vendedor actualiza el estado logístico; el Administrador puede corregir cualquier pedido
+      allow update: if esAdmin() || (autenticado() && resource.data.vendedorId == request.auth.uid);
+      allow delete: if esAdmin();
+    }
+  }
+}

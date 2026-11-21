@@ -11,7 +11,7 @@ import com.artistech.colombia.util.Formato
 import com.artistech.colombia.util.mostrarImagenProducto
 import com.google.android.material.snackbar.Snackbar
 
-/** Detalle del producto con selector de cantidad y botón de agregar al carrito (RF-10). */
+/** Detalle del producto (lectura desde Firestore) con selector de cantidad y botón de agregar al carrito (RF-10). */
 class DetalleProductoActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityDetalleProductoBinding
@@ -19,9 +19,10 @@ class DetalleProductoActivity : AppCompatActivity() {
     private var cantidad = 1
     private var favorito = false
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val encontrado = Repositorio.productoPorId(intent.getIntExtra(EXTRA_ID, -1))
+        val encontrado = Repositorio.productoPorId(intent.getStringExtra(EXTRA_ID).orEmpty())
         if (encontrado == null) {
             finish()
             return
@@ -38,6 +39,7 @@ class DetalleProductoActivity : AppCompatActivity() {
         b.btnAgregar.setOnClickListener { agregarAlCarrito() }
     }
 
+    /** Pinta todos los datos del producto; si está agotado deshabilita la compra. */
     private fun mostrarProducto() {
         mostrarImagenProducto(b.contenedorImagen, b.ivIcono, b.ivFoto, producto)
         b.tvCategoria.text = getString(R.string.detalle_categoria, producto.categoria.etiqueta)
@@ -48,10 +50,12 @@ class DetalleProductoActivity : AppCompatActivity() {
         } else {
             getString(R.string.nuevo)
         }
-        val vendedor = Repositorio.usuarioPorId(producto.vendedorId)
-        b.tvAvatarVendedor.text = vendedor?.iniciales.orEmpty()
-        b.tvVendedor.text = Repositorio.nombreVendedor(producto.vendedorId)
-        b.tvRegionVendedor.text = getString(R.string.detalle_vendedor_region, vendedor?.region ?: producto.region)
+        // El nombre del taller viene desnormalizado en el producto (el comprador no lee perfiles ajenos)
+        val nombreTaller = Repositorio.nombreVendedor(producto.vendedorId)
+        b.tvAvatarVendedor.text = nombreTaller.split(" ").filter { it.isNotBlank() }.take(2)
+            .joinToString("") { it.first().uppercase() }
+        b.tvVendedor.text = nombreTaller
+        b.tvRegionVendedor.text = getString(R.string.detalle_vendedor_region, producto.region)
         b.tvDescripcion.text = producto.descripcion
         b.tvOrigen.text = producto.region
         b.tvTecnica.text = producto.tecnica
@@ -66,6 +70,7 @@ class DetalleProductoActivity : AppCompatActivity() {
         }
     }
 
+    /** Marca o desmarca el producto como favorito (estado visual). */
     private fun alternarFavorito() {
         favorito = !favorito
         b.btnFavorito.setImageResource(if (favorito) R.drawable.ic_corazon_lleno else R.drawable.ic_corazon)
@@ -76,6 +81,7 @@ class DetalleProductoActivity : AppCompatActivity() {
         ).setAnchorView(b.barraInferior).show()
     }
 
+    /** Cambia la cantidad elegida respetando el mínimo (1) y el stock disponible. */
     private fun cambiarCantidad(delta: Int) {
         val nueva = cantidad + delta
         when {
@@ -90,6 +96,7 @@ class DetalleProductoActivity : AppCompatActivity() {
         }
     }
 
+    /** Guarda el producto en el carrito de Firestore y ofrece ir al carrito. */
     private fun agregarAlCarrito() {
         Repositorio.agregarAlCarrito(producto, cantidad)
         Snackbar.make(b.root, resources.getQuantityString(R.plurals.agregados, cantidad, cantidad), Snackbar.LENGTH_LONG)

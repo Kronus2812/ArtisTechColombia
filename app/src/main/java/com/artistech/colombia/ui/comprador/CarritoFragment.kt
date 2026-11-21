@@ -12,13 +12,17 @@ import com.artistech.colombia.databinding.FragmentCarritoBinding
 import com.artistech.colombia.util.Formato
 import com.google.android.material.snackbar.Snackbar
 
-/** CRUD de Carrito con cupón de descuento y resumen de costos. */
+/**
+ * CRUD de Carrito persistente en Firestore (usuarios/{uid}/carrito) con cupón de descuento
+ * y resumen de costos (subtotal, descuento, envío, IVA incluido y total).
+ */
 class CarritoFragment : Fragment(R.layout.fragment_carrito) {
 
     private var _b: FragmentCarritoBinding? = null
     private val b get() = _b!!
     private lateinit var adaptador: CarritoAdapter
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentCarritoBinding.bind(view)
@@ -37,13 +41,18 @@ class CarritoFragment : Fragment(R.layout.fragment_carrito) {
             startActivity(Intent(requireContext(), PasarelaPagoActivity::class.java))
         }
         b.btnExplorar.setOnClickListener { (activity as? CompradorActivity)?.abrirCatalogo(null) }
+
+        // El carrito se guarda en Firestore: cualquier cambio (incluso desde otro equipo) refresca la lista
+        Repositorio.observar(viewLifecycleOwner) { adaptador.refrescar() }
     }
 
+    /** Al volver a la pestaña se recalcula todo (por ejemplo, después de pagar). */
     override fun onResume() {
         super.onResume()
         adaptador.refrescar()
     }
 
+    /** Valida el cupón escrito y recalcula el resumen. */
     private fun aplicarCupon() {
         val codigo = b.etCupon.text?.toString().orEmpty()
         if (Repositorio.aplicarCupon(codigo)) {
@@ -56,6 +65,7 @@ class CarritoFragment : Fragment(R.layout.fragment_carrito) {
         actualizarResumen()
     }
 
+    /** Muestra el estado vacío o la lista, y recalcula los valores del resumen. */
     private fun actualizarResumen() {
         val vista = _b ?: return
         val vacio = Repositorio.carrito.isEmpty()
@@ -70,6 +80,7 @@ class CarritoFragment : Fragment(R.layout.fragment_carrito) {
         (activity as? CompradorActivity)?.actualizarInsigniaCarrito()
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

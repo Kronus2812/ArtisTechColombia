@@ -8,25 +8,42 @@ import com.artistech.colombia.R
 import com.artistech.colombia.databinding.ActivityPedidoConfirmadoBinding
 import com.artistech.colombia.util.Formato
 
-/** Paso 3 de la pasarela: confirmación del pedido. */
+/**
+ * Paso 3 de la pasarela: confirmación del pedido registrado en Firestore, con el estado
+ * y la referencia de la transacción de ePayco y la dirección de entrega.
+ */
 class PedidoConfirmadoActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityPedidoConfirmadoBinding
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityPedidoConfirmadoBinding.inflate(layoutInflater)
         setContentView(b.root)
 
+        val estadoPago = intent.getStringExtra(EXTRA_ESTADO_PAGO).orEmpty()
+        // El título cambia si el pago quedó pendiente o será contra entrega
+        b.tvTitulo.setText(
+            when {
+                estadoPago.equals("Aceptada", ignoreCase = true) -> R.string.confirmado_titulo
+                estadoPago.equals("Pendiente", ignoreCase = true) -> R.string.confirmado_titulo_pendiente
+                else -> R.string.confirmado_titulo_registrado
+            }
+        )
         b.tvCodigo.text = getString(R.string.confirmado_codigo, intent.getStringExtra(EXTRA_CODIGO).orEmpty())
         b.tvTotal.text = Formato.cop(intent.getLongExtra(EXTRA_TOTAL, 0L))
         b.tvMetodo.text = intent.getStringExtra(EXTRA_METODO).orEmpty()
+        b.tvEstadoPago.text = estadoPago
+        b.tvReferencia.text = intent.getStringExtra(EXTRA_REFERENCIA).orEmpty().ifBlank { "—" }
+        b.tvDireccionEntrega.text = intent.getStringExtra(EXTRA_DIRECCION).orEmpty()
 
         b.btnSeguirComprando.setOnClickListener { volverA(R.id.nav_inicio) }
         b.btnVerPedidos.setOnClickListener { volverA(R.id.nav_perfil) }
         onBackPressedDispatcher.addCallback(this) { volverA(R.id.nav_inicio) }
     }
 
+    /** Regresa al contenedor del Comprador en la pestaña indicada. */
     private fun volverA(tab: Int) {
         startActivity(
             Intent(this, CompradorActivity::class.java)
@@ -40,5 +57,8 @@ class PedidoConfirmadoActivity : AppCompatActivity() {
         const val EXTRA_CODIGO = "codigo"
         const val EXTRA_TOTAL = "total"
         const val EXTRA_METODO = "metodo"
+        const val EXTRA_ESTADO_PAGO = "estado_pago"
+        const val EXTRA_REFERENCIA = "referencia"
+        const val EXTRA_DIRECCION = "direccion"
     }
 }

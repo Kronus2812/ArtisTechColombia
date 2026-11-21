@@ -21,6 +21,7 @@ class CompradorActivity : AppCompatActivity() {
     var categoriaPendiente: Categoria? = null
     var enfocarBusqueda = false
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Repositorio.usuarioActual == null) {
@@ -38,30 +39,37 @@ class CompradorActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             irATab(intent.getIntExtra(EXTRA_TAB, R.id.nav_inicio))
         }
+        // La insignia del carrito se actualiza cuando Firestore notifica cambios
+        Repositorio.observar(this) { actualizarInsigniaCarrito() }
     }
 
+    /** Permite que otras pantallas (detalle, confirmación) abran una pestaña concreta. */
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         val tab = intent.getIntExtra(EXTRA_TAB, 0)
         if (tab != 0) irATab(tab)
     }
 
+    /** Al volver a la pantalla se recalculan los datos visibles. */
     override fun onResume() {
         super.onResume()
         actualizarInsigniaCarrito()
     }
 
+    /** Marca la pestaña en la barra inferior y muestra su fragmento. */
     fun irATab(idMenu: Int) {
         b.bottomNav.menu.findItem(idMenu)?.isChecked = true
         mostrar(idMenu)
     }
 
+    /** Abre el catálogo con un filtro de categoría opcional y, si se pide, con el teclado listo. */
     fun abrirCatalogo(categoria: Categoria?, enfocar: Boolean = false) {
         categoriaPendiente = categoria
         enfocarBusqueda = enfocar
         irATab(R.id.nav_catalogo)
     }
 
+    /** Reemplaza el fragmento visible según la opción del menú inferior. */
     private fun mostrar(idMenu: Int) {
         val fragmento: Fragment = when (idMenu) {
             R.id.nav_catalogo -> CatalogoFragment()

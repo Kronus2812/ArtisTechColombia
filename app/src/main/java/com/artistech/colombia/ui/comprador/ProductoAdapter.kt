@@ -16,13 +16,17 @@ class ProductoAdapter(
     private val alTocar: (Producto) -> Unit
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
+    /** Contenedor de las vistas de una fila (patrón ViewHolder con ViewBinding). */
     class ProductoViewHolder(val b: ItemProductoBinding) : RecyclerView.ViewHolder(b.root)
 
+    /** Infla el layout de la fila con ViewBinding. */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder =
         ProductoViewHolder(ItemProductoBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
+    /** Número de elementos que muestra la lista. */
     override fun getItemCount(): Int = productos.size
 
+    /** Llena la tarjeta con nombre, región, precio, categoría, calificación y foto. */
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
         val b = holder.b
@@ -39,6 +43,7 @@ class ProductoAdapter(
         b.root.setOnClickListener { alTocar(producto) }
     }
 
+    /** Reemplaza la lista mostrada (por ejemplo, tras un filtro o un cambio en Firestore). */
     @SuppressLint("NotifyDataSetChanged")
     fun actualizar(nuevos: List<Producto>) {
         productos = nuevos

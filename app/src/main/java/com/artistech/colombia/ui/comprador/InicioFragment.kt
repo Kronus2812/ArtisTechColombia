@@ -1,12 +1,9 @@
 package com.artistech.colombia.ui.comprador
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.artistech.colombia.R
@@ -14,22 +11,30 @@ import com.artistech.colombia.data.Categoria
 import com.artistech.colombia.data.Producto
 import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.databinding.FragmentInicioBinding
+import com.artistech.colombia.util.Ubicacion
 import com.google.android.material.snackbar.Snackbar
 
-/** Pantalla de Inicio del Comprador. */
+/**
+ * Pantalla de Inicio del Comprador: saludo, búsqueda, tarjeta de geolocalización,
+ * categorías y productos destacados (leídos de Firestore en tiempo real).
+ */
 class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
     private var _b: FragmentInicioBinding? = null
     private val b get() = _b!!
+    private lateinit var adaptadorDestacados: ProductoAdapter
 
-    /** Solicitud del permiso de ubicación en tiempo de ejecución (RF-17). */
-    private val permisoUbicacion = registerForActivityResult(ActivityResultContracts.RequestPermission()) { concedido ->
-        actualizarTarjetaGps(concedido)
-        if (!concedido) {
-            Snackbar.make(b.root, R.string.gps_denegado, Snackbar.LENGTH_LONG).show()
+    /** Solicitud de los permisos de ubicación en tiempo de ejecución (RF-17). */
+    private val permisoUbicacion = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { respuesta ->
+        if (respuesta.values.any { it }) {
+            detectarUbicacion()
+        } else {
+            actualizarTarjetaGps()
+            _b?.let { Snackbar.make(it.root, R.string.gps_denegado, Snackbar.LENGTH_LONG).show() }
         }
     }
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentInicioBinding.bind(view)
@@ -56,27 +61,63 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
             chip.setOnClickListener { contenedor?.abrirCatalogo(categoria) }
         }
 
-        // Geolocalización
-        val concedido = ContextCompat.checkSelfPermission(
-            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-        actualizarTarjetaGps(concedido)
-        b.btnActivarGps.setOnClickListener {
-            permisoUbicacion.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
+        // Geolocalización: pedir permiso, detectar la dirección y abrirla en Google Maps
+        b.btnActivarGps.setOnClickListener { permisoUbicacion.launch(Ubicacion.PERMISOS) }
+        b.tvGpsTitulo.setOnClickListener { abrirMapa() }
+        b.tvGpsDetalle.setOnClickListener { abrirMapa() }
+        actualizarTarjetaGps()
+        if (Ubicacion.tienePermiso(requireContext()) && Repositorio.usuarioActual?.latitud == null) detectarUbicacion()
 
-        // Destacados en cuadrícula de 2 columnas
+        // Destacados en cuadrícula de 2 columnas; se refrescan cuando cambia el catálogo
+        adaptadorDestacados = ProductoAdapter(Repositorio.destacados()) { abrirDetalle(it) }
         b.rvDestacados.layoutManager = GridLayoutManager(requireContext(), 2)
-        b.rvDestacados.adapter = ProductoAdapter(Repositorio.destacados()) { abrirDetalle(it) }
+        b.rvDestacados.adapter = adaptadorDestacados
+        Repositorio.observar(viewLifecycleOwner) {
+            adaptadorDestacados.actualizar(Repositorio.destacados())
+            actualizarTarjetaGps()
+        }
     }
 
-    private fun actualizarTarjetaGps(activo: Boolean) {
+    /** Obtiene la ubicación actual con el GPS, la convierte en dirección y la guarda en el perfil. */
+    private fun detectarUbicacion() {
+        _b?.tvGpsDetalle?.setText(R.string.gps_buscando)
+        Ubicacion.obtener(
+            requireContext().applicationContext,
+            alObtener = { datos ->
+                Repositorio.guardarUbicacion(datos.direccion, datos.latitud, datos.longitud)
+                actualizarTarjetaGps()
+            },
+            alFallar = { mensaje ->
+                actualizarTarjetaGps()
+                _b?.let { Snackbar.make(it.root, mensaje, Snackbar.LENGTH_LONG).show() }
+            }
+        )
+    }
+
+    /** Muestra la dirección detectada o invita a activar el GPS. */
+    private fun actualizarTarjetaGps() {
         val vista = _b ?: return
-        vista.tvGpsTitulo.setText(if (activo) R.string.gps_titulo_activo else R.string.gps_titulo_inactivo)
-        vista.tvGpsDetalle.setText(if (activo) R.string.gps_detalle_activo else R.string.gps_detalle_inactivo)
-        vista.btnActivarGps.visibility = if (activo) View.GONE else View.VISIBLE
+        val usuario = Repositorio.usuarioActual
+        val conPermiso = Ubicacion.tienePermiso(requireContext())
+        if (conPermiso && usuario?.latitud != null && usuario.direccion.isNotBlank()) {
+            vista.tvGpsTitulo.text = getString(R.string.gps_titulo_entrega)
+            vista.tvGpsDetalle.text = getString(R.string.gps_detalle_direccion, usuario.direccion)
+        } else {
+            vista.tvGpsTitulo.setText(R.string.gps_titulo_inactivo)
+            vista.tvGpsDetalle.setText(R.string.gps_detalle_inactivo)
+        }
+        vista.btnActivarGps.visibility = if (conPermiso) View.GONE else View.VISIBLE
     }
 
+    /** Abre la ubicación guardada en Google Maps. */
+    private fun abrirMapa() {
+        val usuario = Repositorio.usuarioActual ?: return
+        val lat = usuario.latitud ?: return
+        val lng = usuario.longitud ?: return
+        Ubicacion.abrirEnMapa(requireContext(), lat, lng, getString(R.string.mapa_mi_ubicacion))
+    }
+
+    /** Abre la ficha de detalle del producto tocado. */
     private fun abrirDetalle(producto: Producto) {
         startActivity(
             Intent(requireContext(), DetalleProductoActivity::class.java)
@@ -84,6 +125,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
         )
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

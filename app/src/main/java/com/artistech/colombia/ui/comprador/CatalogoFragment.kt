@@ -14,13 +14,14 @@ import com.artistech.colombia.data.Categoria
 import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.databinding.FragmentCatalogoBinding
 
-/** Catálogo de productos con búsqueda en tiempo real y filtro por categoría. */
+/** Catálogo de productos publicados (Firestore) con búsqueda en tiempo real y filtro por categoría (RF-08 y RF-09). */
 class CatalogoFragment : Fragment(R.layout.fragment_catalogo) {
 
     private var _b: FragmentCatalogoBinding? = null
     private val b get() = _b!!
     private lateinit var adaptador: ProductoAdapter
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentCatalogoBinding.bind(view)
@@ -48,8 +49,12 @@ class CatalogoFragment : Fragment(R.layout.fragment_catalogo) {
         b.grupoFiltro.setOnCheckedStateChangeListener { _, _ -> filtrar() }
         b.etBuscar.doAfterTextChanged { filtrar() }
         filtrar()
+
+        // Los productos llegan desde Firestore en tiempo real: se vuelve a filtrar cuando cambian
+        Repositorio.observar(viewLifecycleOwner) { filtrar() }
     }
 
+    /** Traduce el chip marcado a la categoría del modelo (null = todas). */
     private fun categoriaSeleccionada(): Categoria? = when (b.grupoFiltro.checkedChipId) {
         R.id.chipTejidos -> Categoria.TEJIDOS
         R.id.chipCeramica -> Categoria.CERAMICA
@@ -60,6 +65,7 @@ class CatalogoFragment : Fragment(R.layout.fragment_catalogo) {
         else -> null
     }
 
+    /** Operación inversa: el id del chip que corresponde a una categoría. */
     private fun idChipDe(categoria: Categoria): Int = when (categoria) {
         Categoria.TEJIDOS -> R.id.chipTejidos
         Categoria.CERAMICA -> R.id.chipCeramica
@@ -69,7 +75,9 @@ class CatalogoFragment : Fragment(R.layout.fragment_catalogo) {
         Categoria.DISENO -> R.id.chipDiseno
     }
 
+    /** Aplica texto y categoría, actualiza la cuadrícula, el contador y el estado vacío. */
     private fun filtrar() {
+        if (_b == null) return
         val resultados = Repositorio.buscarProductos(b.etBuscar.text?.toString().orEmpty(), categoriaSeleccionada())
         adaptador.actualizar(resultados)
         b.tvResultados.text = resources.getQuantityString(R.plurals.resultados, resultados.size, resultados.size)
@@ -77,6 +85,7 @@ class CatalogoFragment : Fragment(R.layout.fragment_catalogo) {
         b.rvCatalogo.isVisible = resultados.isNotEmpty()
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

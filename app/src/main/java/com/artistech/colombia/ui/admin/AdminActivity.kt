@@ -20,6 +20,7 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityAdminBinding
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val admin = Repositorio.usuarioActual
@@ -79,6 +80,7 @@ class AdminActivity : AppCompatActivity() {
         b.navView.setCheckedItem(idMenu)
     }
 
+    /** Pide confirmación antes de cerrar la sesión. */
     private fun confirmarSalida() {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.cerrar_sesion)

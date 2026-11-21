@@ -5,9 +5,12 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
+import coil.load
 import com.artistech.colombia.R
 import com.artistech.colombia.data.Categoria
 import com.artistech.colombia.data.EstadoProducto
@@ -15,44 +18,47 @@ import com.artistech.colombia.data.Producto
 import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.data.Rol
 import com.artistech.colombia.databinding.ActivityProductoFormBinding
+import com.artistech.colombia.util.ImagenesFirebase
+import com.artistech.colombia.util.mensajeError
 import com.artistech.colombia.util.mostrarToast
 import com.artistech.colombia.util.pintarInsignia
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import java.io.File
 
-/** Formulario para crear (C) y editar (U) productos, con foto desde la cámara o la galería. */
+/**
+ * Formulario para crear (C) y editar (U) productos en Firestore, con foto desde la cámara
+ * (resolución completa) o la galería. La foto se sube a Firebase Storage al guardar.
+ */
 class ProductoFormActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityProductoFormBinding
     private var original: Producto? = null
     private var fotoNueva: Bitmap? = null
-    private var uriNueva: Uri? = null
     private var categoria: Categoria? = null
 
-    private val tomarFoto = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { foto ->
-        if (foto != null) {
-            fotoNueva = foto
-            uriNueva = null
-            b.ivFoto.setImageBitmap(foto)
-            mostrarVistaPrevia(true)
-        }
+    /** Archivo temporal donde la app de cámara guarda la foto a resolución completa. */
+    private var uriCamara: Uri? = null
+
+    /** Cámara: TakePicture escribe la foto en el Uri del FileProvider. */
+    private val tomarFoto = registerForActivityResult(ActivityResultContracts.TakePicture()) { exito ->
+        val uri = uriCamara
+        if (exito && uri != null) usarFoto(uri)
     }
 
-    private val elegirDeGaleria = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        if (uri != null) {
-            uriNueva = uri
-            fotoNueva = null
-            b.ivFoto.setImageURI(uri)
-            mostrarVistaPrevia(true)
-        }
+    /** Galería: selector de fotos del sistema (no requiere permisos de almacenamiento). */
+    private val elegirDeGaleria = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) usarFoto(uri)
     }
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityProductoFormBinding.inflate(layoutInflater)
         setContentView(b.root)
 
-        original = Repositorio.productoPorId(intent.getIntExtra(EXTRA_ID, 0))
+        original = intent.getStringExtra(EXTRA_ID)?.let { Repositorio.productoPorId(it) }
         b.toolbar.setTitle(if (original == null) R.string.form_producto_nuevo else R.string.form_producto_editar)
         b.toolbar.setNavigationOnClickListener { finish() }
 
@@ -64,25 +70,47 @@ class ProductoFormActivity : AppCompatActivity() {
             actualizarFondoCategoria()
         }
 
-        b.btnTomarFoto.setOnClickListener {
-            try {
-                tomarFoto.launch(null)
-            } catch (e: ActivityNotFoundException) {
-                Snackbar.make(b.root, R.string.error_sin_camara, Snackbar.LENGTH_LONG).show()
-            }
+        b.btnTomarFoto.setOnClickListener { abrirCamara() }
+        b.btnGaleria.setOnClickListener {
+            elegirDeGaleria.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
-        b.btnGaleria.setOnClickListener { elegirDeGaleria.launch("image/*") }
         b.btnGuardar.setOnClickListener { guardar() }
         b.btnEliminar.setOnClickListener { confirmarEliminacion() }
 
         cargarProducto()
     }
 
+    /** Crea un archivo temporal en la caché, lo comparte con la cámara mediante FileProvider y la abre. */
+    private fun abrirCamara() {
+        try {
+            val carpeta = File(cacheDir, "fotos").apply { mkdirs() }
+            val archivo = File(carpeta, "producto_${System.currentTimeMillis()}.jpg")
+            val uri = FileProvider.getUriForFile(this, "$packageName.fileprovider", archivo)
+            uriCamara = uri
+            tomarFoto.launch(uri)
+        } catch (e: ActivityNotFoundException) {
+            Snackbar.make(b.root, R.string.error_sin_camara, Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    /** Decodifica la foto elegida (reducida y enderezada) y la muestra como vista previa. */
+    private fun usarFoto(uri: Uri) {
+        val imagen = ImagenesFirebase.cargarDesdeUri(this, uri)
+        if (imagen == null) {
+            Snackbar.make(b.root, R.string.error_foto, Snackbar.LENGTH_LONG).show()
+            return
+        }
+        fotoNueva = imagen
+        b.ivFoto.setImageBitmap(imagen)
+        mostrarVistaPrevia(true)
+    }
+
+    /** Modo edición: llena el formulario con los datos actuales del producto. */
     private fun cargarProducto() {
         val p = original
         if (p == null) {
             b.tvEstado.pintarInsignia(getString(R.string.form_estado_nuevo), R.color.mostaza_claro, R.color.mostaza_oscuro)
-            Repositorio.usuarioActual?.region?.let { b.etRegion.setText(it) }
+            Repositorio.usuarioActual?.region?.takeIf { it.isNotBlank() }?.let { b.etRegion.setText(it) }
             return
         }
         categoria = p.categoria
@@ -98,25 +126,28 @@ class ProductoFormActivity : AppCompatActivity() {
         b.btnEliminar.isVisible = true
         actualizarFondoCategoria()
         when {
-            p.foto != null -> { b.ivFoto.setImageBitmap(p.foto); mostrarVistaPrevia(true) }
-            p.fotoUri != null -> { b.ivFoto.setImageURI(p.fotoUri); mostrarVistaPrevia(true) }
+            p.fotoUrl.isNotBlank() -> { b.ivFoto.load(p.fotoUrl); mostrarVistaPrevia(true) }
+            p.fotoRespaldo != null -> { b.ivFoto.setImageBitmap(p.fotoRespaldo); mostrarVistaPrevia(true) }
         }
     }
 
+    /** Muestra el degradado y el ícono de la categoría elegida mientras no haya foto. */
     private fun actualizarFondoCategoria() {
         val c = categoria ?: return
         b.contenedorImagen.setBackgroundResource(c.fondo)
         b.ivIcono.setImageResource(c.icono)
     }
 
+    /** Alterna entre la foto elegida y el ícono de la categoría. */
     private fun mostrarVistaPrevia(conFoto: Boolean) {
         b.ivFoto.isVisible = conFoto
         b.ivIcono.isVisible = !conFoto
     }
 
-    private fun texto(campo: com.google.android.material.textfield.TextInputEditText): String =
-        campo.text?.toString()?.trim().orEmpty()
+    /** Texto limpio (sin espacios a los lados) de un campo del formulario. */
+    private fun texto(campo: TextInputEditText): String = campo.text?.toString()?.trim().orEmpty()
 
+    /** Valida los campos y guarda el producto (con su foto) en Firebase. */
     private fun guardar() {
         listOf(b.tilNombre, b.tilPrecio, b.tilStock, b.tilCategoria, b.tilRegion, b.tilDescripcion)
             .forEach { it.error = null }
@@ -136,44 +167,62 @@ class ProductoFormActivity : AppCompatActivity() {
         if (!valido || precio == null || stock == null) return
 
         val anterior = original
-        val esAdmin = Repositorio.usuarioActual?.rol == Rol.ADMIN
+        val usuario = Repositorio.usuarioActual ?: return
+        val esAdmin = usuario.rol == Rol.ADMIN
+        // Reglas de estado: lo nuevo pasa por moderación; sin stock queda agotado; al reponer se publica
         val estado = when {
-            anterior == null -> EstadoProducto.EN_REVISION            // todo producto nuevo pasa por moderación
+            anterior == null -> if (esAdmin) EstadoProducto.PUBLICADO else EstadoProducto.EN_REVISION
             stock == 0 -> EstadoProducto.AGOTADO
             anterior.estado == EstadoProducto.AGOTADO -> EstadoProducto.PUBLICADO
             else -> anterior.estado
         }
-        Repositorio.guardarProducto(
-            Producto(
-                id = anterior?.id ?: 0,
-                nombre = nombre,
-                descripcion = descripcion,
-                precio = precio,
-                stock = stock,
-                categoria = categoria ?: Categoria.TEJIDOS,
-                region = region,
-                tecnica = texto(b.etTecnica),
-                tiempoElaboracion = texto(b.etTiempo),
-                vendedorId = anterior?.vendedorId ?: Repositorio.usuarioActual?.id ?: 0,
-                estado = estado,
-                calificacion = anterior?.calificacion ?: 0.0,
-                resenas = anterior?.resenas ?: 0,
-                foto = fotoNueva ?: if (uriNueva == null) anterior?.foto else null,
-                fotoUri = uriNueva ?: if (fotoNueva == null) anterior?.fotoUri else null
-            )
+        val producto = Producto(
+            id = anterior?.id ?: "",
+            nombre = nombre,
+            descripcion = descripcion,
+            precio = precio,
+            stock = stock,
+            categoria = categoria ?: Categoria.TEJIDOS,
+            region = region,
+            tecnica = texto(b.etTecnica),
+            tiempoElaboracion = texto(b.etTiempo),
+            vendedorId = anterior?.vendedorId ?: usuario.id,
+            vendedorNombre = anterior?.vendedorNombre ?: usuario.nombreTaller.ifBlank { usuario.nombres },
+            estado = estado,
+            calificacion = anterior?.calificacion ?: 0.0,
+            resenas = anterior?.resenas ?: 0,
+            fotoUrl = anterior?.fotoUrl.orEmpty(),
+            fotoBase64 = anterior?.fotoBase64.orEmpty(),
+            creadoEn = anterior?.creadoEn ?: System.currentTimeMillis()
         )
-        mostrarToast(
-            getString(
-                when {
-                    anterior != null -> R.string.producto_actualizado
-                    esAdmin -> R.string.producto_creado
-                    else -> R.string.producto_enviado_revision
+
+        mostrarGuardando(true)
+        Repositorio.guardarProducto(producto, fotoNueva) { resultado ->
+            mostrarGuardando(false)
+            resultado
+                .onSuccess {
+                    mostrarToast(
+                        getString(
+                            when {
+                                anterior != null -> R.string.producto_actualizado
+                                esAdmin -> R.string.producto_creado
+                                else -> R.string.producto_enviado_revision
+                            }
+                        )
+                    )
+                    finish()
                 }
-            )
-        )
-        finish()
+                .onFailure { error -> Snackbar.make(b.root, mensajeError(error), Snackbar.LENGTH_LONG).show() }
+        }
     }
 
+    /** Bloquea el botón mientras se sube la foto y se escribe en Firestore. */
+    private fun mostrarGuardando(guardando: Boolean) {
+        b.btnGuardar.isEnabled = !guardando
+        b.btnGuardar.setText(if (guardando) R.string.guardando else R.string.guardar)
+    }
+
+    /** Eliminación (D) con confirmación. */
     private fun confirmarEliminacion() {
         val p = original ?: return
         MaterialAlertDialogBuilder(this)
@@ -181,9 +230,14 @@ class ProductoFormActivity : AppCompatActivity() {
             .setMessage(getString(R.string.eliminar_producto_mensaje, p.nombre))
             .setNegativeButton(R.string.cancelar, null)
             .setPositiveButton(R.string.eliminar) { _, _ ->
-                Repositorio.eliminarProducto(p.id)
-                mostrarToast(getString(R.string.producto_eliminado))
-                finish()
+                Repositorio.eliminarProducto(p) { resultado ->
+                    resultado
+                        .onSuccess {
+                            mostrarToast(getString(R.string.producto_eliminado))
+                            finish()
+                        }
+                        .onFailure { error -> Snackbar.make(b.root, mensajeError(error), Snackbar.LENGTH_LONG).show() }
+                }
             }
             .show()
     }

@@ -13,54 +13,103 @@ import com.artistech.colombia.databinding.ItemBarraGraficoBinding
 import com.artistech.colombia.databinding.ItemCategoriaVentaBinding
 import com.artistech.colombia.databinding.ItemVendedorTopBinding
 import com.artistech.colombia.util.Formato
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 /**
- * Reporte de ventas del Administrador. El gráfico de barras se construye inflando
- * item_barra_grafico.xml y asignando la altura de cada barra en proporción al valor.
+ * Reporte de ventas del Administrador calculado con los pedidos reales de Firestore.
+ * El gráfico de barras se construye inflando item_barra_grafico.xml y asignando la altura
+ * de cada barra en proporción al valor.
  */
 class ReporteVentasFragment : Fragment(R.layout.fragment_reporte_ventas) {
 
     private var _b: FragmentReporteVentasBinding? = null
     private val b get() = _b!!
 
-    /** Serie de demostración por periodo: etiquetas, valores y variación frente al periodo anterior. */
+    /** Serie de un periodo: etiquetas del eje, valores, número de pedidos y variación vs. el periodo anterior. */
     private data class Serie(val etiquetas: List<String>, val valores: List<Long>, val pedidos: Int, val variacion: String)
 
-    private val series = mapOf(
-        R.id.chipSemana to Serie(
-            listOf("L", "M", "M", "J", "V", "S", "D"),
-            listOf(420_000L, 610_000L, 480_000L, 750_000L, 580_000L, 920_000L, 660_000L), 27, "▲ 12 %"
-        ),
-        R.id.chipMes to Serie(
-            listOf("Sem 1", "Sem 2", "Sem 3", "Sem 4"),
-            listOf(3_200_000L, 4_100_000L, 3_600_000L, 4_900_000L), 112, "▲ 18 %"
-        ),
-        R.id.chipSemestre to Serie(
-            listOf("Jun", "Jul", "Ago", "Sep", "Oct", "Nov"),
-            listOf(9_800_000L, 11_200_000L, 12_900_000L, 12_100_000L, 15_800_000L, 17_400_000L), 586, "▲ 34 %"
-        )
-    )
+    private val localeColombia = Locale.forLanguageTag("es-CO")
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentReporteVentasBinding.bind(view)
 
-        b.grupoPeriodo.setOnCheckedStateChangeListener { _, ids ->
-            ids.firstOrNull()?.let { mostrarPeriodo(it) }
-        }
-        mostrarPeriodo(R.id.chipSemana)
-        mostrarCategorias()
-        mostrarMejoresVendedores()
+        b.grupoPeriodo.setOnCheckedStateChangeListener { _, _ -> refrescar() }
         b.btnExportar.setOnClickListener { exportarCsv() }
+        refrescar()
+
+        // Cada pedido nuevo registrado en Firestore actualiza el reporte en vivo
+        Repositorio.observar(viewLifecycleOwner) { refrescar() }
     }
 
+    /** Vuelve a dibujar todas las secciones del reporte con los pedidos actuales. */
+    private fun refrescar() {
+        val vista = _b ?: return
+        mostrarPeriodo(vista.grupoPeriodo.checkedChipId.takeIf { it != View.NO_ID } ?: R.id.chipSemana)
+        mostrarCategorias()
+        mostrarMejoresVendedores()
+    }
+
+    /**
+     * Agrupa los pedidos válidos (no cancelados) de Firestore por día, semana o mes.
+     * También suma el periodo anterior de igual duración para calcular la variación.
+     */
+    private fun calcularSerie(idChip: Int): Serie {
+        val pedidos = Repositorio.pedidosValidos()
+        val dia = 24L * 60 * 60 * 1000
+        val hoy = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }
+        // Lista de intervalos [inicio, fin) y su etiqueta
+        val intervalos: List<Triple<Long, Long, String>> = when (idChip) {
+            R.id.chipMes -> (3 downTo 0).map { i ->
+                val fin = hoy.timeInMillis + dia - i * 7 * dia
+                Triple(fin - 7 * dia, fin, getString(R.string.reporte_semana_n, 4 - i))
+            }
+            R.id.chipSemestre -> (5 downTo 0).map { i ->
+                val inicio = (hoy.clone() as Calendar).apply { set(Calendar.DAY_OF_MONTH, 1); add(Calendar.MONTH, -i) }
+                val fin = (inicio.clone() as Calendar).apply { add(Calendar.MONTH, 1) }
+                val etiqueta = SimpleDateFormat("MMM", localeColombia).format(inicio.time)
+                    .replace(".", "").replaceFirstChar { it.uppercase() }
+                Triple(inicio.timeInMillis, fin.timeInMillis, etiqueta)
+            }
+            else -> (6 downTo 0).map { i ->
+                val inicio = hoy.timeInMillis - i * dia
+                val etiqueta = SimpleDateFormat("EEE", localeColombia).format(Date(inicio))
+                    .replace(".", "").take(2).replaceFirstChar { it.uppercase() }
+                Triple(inicio, inicio + dia, etiqueta)
+            }
+        }
+        val valores = intervalos.map { (inicio, fin, _) -> pedidos.filter { it.fechaMillis in inicio until fin }.sumOf { it.total } }
+        val desde = intervalos.first().first
+        val hasta = intervalos.last().second
+        val duracion = hasta - desde
+        val actual = valores.sum()
+        val anterior = pedidos.filter { it.fechaMillis in (desde - duracion) until desde }.sumOf { it.total }
+        val variacion = when {
+            anterior == 0L && actual == 0L -> "—"
+            anterior == 0L -> getString(R.string.reporte_nuevo)
+            else -> {
+                val porcentaje = (actual - anterior) * 100 / anterior
+                if (porcentaje >= 0) "▲ $porcentaje %" else "▼ ${-porcentaje} %"
+            }
+        }
+        val conteo = pedidos.count { it.fechaMillis in desde until hasta }
+        return Serie(intervalos.map { it.third }, valores, conteo, variacion)
+    }
+
+    /** Muestra total, variación, número de pedidos, ticket promedio y el gráfico del periodo. */
     private fun mostrarPeriodo(idChip: Int) {
-        val serie = series[idChip] ?: return
+        val serie = calcularSerie(idChip)
         val total = serie.valores.sum()
         b.tvTotal.text = Formato.cop(total)
         b.tvVariacion.text = getString(R.string.reporte_variacion, serie.variacion)
         b.tvPedidos.text = serie.pedidos.toString()
-        b.tvTicket.text = Formato.cop(total / serie.pedidos)
+        b.tvTicket.text = Formato.cop(if (serie.pedidos > 0) total / serie.pedidos else 0L)
         dibujarBarras(serie)
     }
 
@@ -75,12 +124,13 @@ class ReporteVentasFragment : Fragment(R.layout.fragment_reporte_ventas) {
             columna.tvValor.text = Formato.copCorto(valor)
             columna.tvEtiqueta.text = serie.etiquetas[i]
             columna.vBarra.layoutParams.height = (alturaMaxima * valor / maximo).toInt().coerceAtLeast(12)
-            val color = if (valor == maximo) R.color.terracota else R.color.mostaza
+            val color = if (valor == maximo && valor > 0) R.color.terracota else R.color.mostaza
             columna.vBarra.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), color))
             contenedor.addView(columna.root)
         }
     }
 
+    /** Barras de progreso con las ventas por categoría. */
     private fun mostrarCategorias() {
         val datos = Repositorio.ventasPorCategoria()
         val maximo = datos.maxOfOrNull { it.second }?.takeIf { it > 0 } ?: 1L
@@ -96,6 +146,7 @@ class ReporteVentasFragment : Fragment(R.layout.fragment_reporte_ventas) {
         }
     }
 
+    /** Top 3 de vendedores por ventas. */
     private fun mostrarMejoresVendedores() {
         b.contenedorVendedores.removeAllViews()
         Repositorio.mejoresVendedores().forEachIndexed { i, (nombre, region, valor) ->
@@ -111,9 +162,9 @@ class ReporteVentasFragment : Fragment(R.layout.fragment_reporte_ventas) {
     /** Exporta el reporte como texto CSV y abre el menú de compartir de Android. */
     private fun exportarCsv() {
         val csv = buildString {
-            appendLine("pedido,comprador,vendedor,detalle,fecha,metodo,estado,total")
+            appendLine("pedido,comprador,vendedor,detalle,fecha,metodo,estado_pago,referencia_epayco,estado,direccion,total")
             Repositorio.pedidos.forEach { p ->
-                appendLine("${p.codigo},${p.compradorNombre},${Repositorio.nombreVendedor(p.vendedorId)},\"${p.detalle}\",${p.fecha},${p.metodoPago},${p.estado.etiqueta},${p.total}")
+                appendLine("${p.codigo},${p.compradorNombre},${p.vendedorNombre},\"${p.detalle}\",${p.fecha},${p.metodoPago},${p.estadoPago},${p.referenciaPago},${p.estado.etiqueta},\"${p.direccionEntrega}\",${p.total}")
             }
         }
         val intent = Intent(Intent.ACTION_SEND)
@@ -123,6 +174,7 @@ class ReporteVentasFragment : Fragment(R.layout.fragment_reporte_ventas) {
         startActivity(Intent.createChooser(intent, getString(R.string.reporte_exportar)))
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

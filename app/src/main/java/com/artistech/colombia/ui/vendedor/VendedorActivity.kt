@@ -16,6 +16,7 @@ class VendedorActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityVendedorBinding
 
+    /** Ciclo de vida: infla el layout con ViewBinding y configura los eventos de la pantalla. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Repositorio.usuarioActual == null) {
@@ -34,13 +35,17 @@ class VendedorActivity : AppCompatActivity() {
             b.bottomNav.menu.findItem(R.id.nav_productos_vendedor)?.isChecked = true
             mostrar(R.id.nav_productos_vendedor)
         }
+        // La insignia de pedidos por despachar se actualiza con cada cambio en Firestore
+        Repositorio.observar(this) { actualizarInsigniaPedidos() }
     }
 
+    /** Al volver a la pantalla se recalculan los datos visibles. */
     override fun onResume() {
         super.onResume()
         actualizarInsigniaPedidos()
     }
 
+    /** Reemplaza el fragmento visible según la opción del menú inferior. */
     private fun mostrar(idMenu: Int) {
         val fragmento: Fragment = when (idMenu) {
             R.id.nav_pedidos_vendedor -> PedidosVendedorFragment()

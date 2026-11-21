@@ -11,16 +11,22 @@ import com.artistech.colombia.data.Pedido
 import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.databinding.FragmentPedidosVendedorBinding
 import com.artistech.colombia.ui.comun.PedidoAdapter
+import com.artistech.colombia.util.Ubicacion
+import com.artistech.colombia.util.mensajeError
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-/** Historial de pedidos recibidos por el Vendedor; permite actualizar el estado del envío. */
+/**
+ * Historial de pedidos recibidos por el Vendedor (consulta en Firestore filtrada por vendedorId);
+ * permite actualizar el estado del envío y ver la dirección de entrega en el mapa.
+ */
 class PedidosVendedorFragment : Fragment(R.layout.fragment_pedidos_vendedor) {
 
     private var _b: FragmentPedidosVendedorBinding? = null
     private val b get() = _b!!
     private lateinit var adaptador: PedidoAdapter
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentPedidosVendedorBinding.bind(view)
@@ -30,8 +36,12 @@ class PedidosVendedorFragment : Fragment(R.layout.fragment_pedidos_vendedor) {
         b.rvPedidos.adapter = adaptador
         b.grupoEstado.setOnCheckedStateChangeListener { _, _ -> refrescar() }
         refrescar()
+
+        // Los pedidos nuevos de los compradores aparecen al instante (escucha de Firestore)
+        Repositorio.observar(viewLifecycleOwner) { refrescar() }
     }
 
+    /** Aplica el filtro de estado y actualiza el resumen y la insignia. */
     private fun refrescar() {
         val vista = _b ?: return
         val vendedorId = Repositorio.usuarioActual?.id ?: return
@@ -53,20 +63,35 @@ class PedidosVendedorFragment : Fragment(R.layout.fragment_pedidos_vendedor) {
         (activity as? VendedorActivity)?.actualizarInsigniaPedidos()
     }
 
+    /** Diálogo con el detalle del pedido: dirección de entrega (con mapa) y cambio de estado. */
     private fun cambiarEstado(pedido: Pedido) {
         val estados = EstadoPedido.entries
-        MaterialAlertDialogBuilder(requireContext())
+        var elegido = estados.indexOf(pedido.estado)
+        val dialogo = MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.pedido_cambiar_estado, pedido.codigo))
-            .setSingleChoiceItems(estados.map { it.etiqueta }.toTypedArray(), estados.indexOf(pedido.estado)) { dialogo, posicion ->
-                pedido.estado = estados[posicion]
-                dialogo.dismiss()
-                refrescar()
-                Snackbar.make(b.root, getString(R.string.pedido_estado_actualizado, pedido.estado.etiqueta), Snackbar.LENGTH_SHORT).show()
-            }
+            .setSingleChoiceItems(estados.map { it.etiqueta }.toTypedArray(), elegido) { _, posicion -> elegido = posicion }
             .setNegativeButton(R.string.cancelar, null)
-            .show()
+            .setPositiveButton(R.string.guardar) { _, _ ->
+                val nuevo = estados[elegido]
+                Repositorio.actualizarEstadoPedido(pedido, nuevo) { resultado ->
+                    val vista = _b ?: return@actualizarEstadoPedido
+                    resultado
+                        .onSuccess { Snackbar.make(vista.root, getString(R.string.pedido_estado_actualizado, nuevo.etiqueta), Snackbar.LENGTH_SHORT).show() }
+                        .onFailure { Snackbar.make(vista.root, requireContext().mensajeError(it), Snackbar.LENGTH_LONG).show() }
+                }
+            }
+        // Si el pedido tiene coordenadas de entrega, se ofrece abrirlas en Google Maps
+        val lat = pedido.latitud
+        val lng = pedido.longitud
+        if (lat != null && lng != null) {
+            dialogo.setNeutralButton(R.string.pedido_ver_mapa) { _, _ ->
+                Ubicacion.abrirEnMapa(requireContext(), lat, lng, pedido.codigo)
+            }
+        }
+        dialogo.show()
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

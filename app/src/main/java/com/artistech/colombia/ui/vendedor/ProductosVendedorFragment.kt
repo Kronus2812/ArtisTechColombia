@@ -15,16 +15,21 @@ import com.artistech.colombia.data.Repositorio
 import com.artistech.colombia.databinding.FragmentProductosVendedorBinding
 import com.artistech.colombia.ui.comun.ProductoFilaAdapter
 import com.artistech.colombia.util.Formato
+import com.artistech.colombia.util.mensajeError
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-/** Panel de productos del Vendedor: CRUD completo (crear, listar, editar y eliminar). */
+/**
+ * Panel de productos del Vendedor: CRUD completo sobre la colección "productos" de Firestore
+ * (crear, listar, editar y eliminar) con indicadores de ventas y filtros por estado.
+ */
 class ProductosVendedorFragment : Fragment(R.layout.fragment_productos_vendedor) {
 
     private var _b: FragmentProductosVendedorBinding? = null
     private val b get() = _b!!
     private lateinit var adaptador: ProductoFilaAdapter
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentProductosVendedorBinding.bind(view)
@@ -43,6 +48,7 @@ class ProductosVendedorFragment : Fragment(R.layout.fragment_productos_vendedor)
 
         // El FAB extendido se contrae al desplazar la lista y se expande al volver arriba
         b.rvProductos.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            /** Contrae el FAB al bajar y lo expande al subir. */
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) b.fabNuevo.shrink() else if (dy < 0) b.fabNuevo.extend()
             }
@@ -51,13 +57,19 @@ class ProductosVendedorFragment : Fragment(R.layout.fragment_productos_vendedor)
         b.fabNuevo.setOnClickListener { abrirFormulario(null) }
         b.etBuscar.doAfterTextChanged { refrescar() }
         b.grupoEstado.setOnCheckedStateChangeListener { _, _ -> refrescar() }
+
+        // Escucha en tiempo real: la lista cambia cuando Firestore confirma una escritura
+        // o cuando el Administrador aprueba/rechaza un producto
+        Repositorio.observar(viewLifecycleOwner) { refrescar() }
     }
 
+    /** Al volver a la pantalla se recalculan los datos visibles. */
     override fun onResume() {
         super.onResume()
         refrescar()
     }
 
+    /** Recalcula indicadores y aplica búsqueda y filtro de estado sobre los productos del vendedor. */
     private fun refrescar() {
         val vista = _b ?: return
         val vendedor = Repositorio.usuarioActual ?: return
@@ -83,25 +95,31 @@ class ProductosVendedorFragment : Fragment(R.layout.fragment_productos_vendedor)
         vista.tvVacio.isVisible = lista.isEmpty()
     }
 
+    /** Abre el formulario vacío (crear) o con un producto (editar). */
     private fun abrirFormulario(producto: Producto?) {
         val intent = Intent(requireContext(), ProductoFormActivity::class.java)
         if (producto != null) intent.putExtra(ProductoFormActivity.EXTRA_ID, producto.id)
         startActivity(intent)
     }
 
+    /** Eliminación (D) con diálogo de confirmación. */
     private fun confirmarEliminacion(producto: Producto) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.eliminar_producto_titulo)
             .setMessage(getString(R.string.eliminar_producto_mensaje, producto.nombre))
             .setNegativeButton(R.string.cancelar, null)
             .setPositiveButton(R.string.eliminar) { _, _ ->
-                Repositorio.eliminarProducto(producto.id)
-                refrescar()
-                Snackbar.make(b.root, R.string.producto_eliminado, Snackbar.LENGTH_SHORT).show()
+                Repositorio.eliminarProducto(producto) { resultado ->
+                    val vista = _b ?: return@eliminarProducto
+                    resultado
+                        .onSuccess { Snackbar.make(vista.root, R.string.producto_eliminado, Snackbar.LENGTH_SHORT).show() }
+                        .onFailure { Snackbar.make(vista.root, requireContext().mensajeError(it), Snackbar.LENGTH_LONG).show() }
+                }
             }
             .show()
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

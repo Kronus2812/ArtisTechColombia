@@ -14,16 +14,18 @@ import com.artistech.colombia.databinding.FragmentProductosAdminBinding
 import com.artistech.colombia.ui.comun.ProductoFilaAdapter
 import com.artistech.colombia.ui.vendedor.ProductoFormActivity
 import com.artistech.colombia.util.Formato
+import com.artistech.colombia.util.mensajeError
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
-/** Gestión de productos y moderación del catálogo (RF-23). */
+/** Gestión de todos los productos de Firestore y moderación del catálogo (RF-23). */
 class ProductosAdminFragment : Fragment(R.layout.fragment_productos_admin) {
 
     private var _b: FragmentProductosAdminBinding? = null
     private val b get() = _b!!
     private lateinit var adaptador: ProductoFilaAdapter
 
+    /** Enlaza la vista del fragmento (ViewBinding), configura listas y eventos y se suscribe a los cambios de Firestore. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _b = FragmentProductosAdminBinding.bind(view)
@@ -38,13 +40,18 @@ class ProductosAdminFragment : Fragment(R.layout.fragment_productos_admin) {
         b.rvProductos.layoutManager = LinearLayoutManager(requireContext())
         b.rvProductos.adapter = adaptador
         b.grupoEstado.setOnCheckedStateChangeListener { _, _ -> refrescar() }
+
+        // Los productos nuevos que crean los vendedores aparecen al instante para moderarlos
+        Repositorio.observar(viewLifecycleOwner) { refrescar() }
     }
 
+    /** Al volver a la pantalla se recalculan los datos visibles. */
     override fun onResume() {
         super.onResume()
         refrescar()
     }
 
+    /** Recalcula indicadores y aplica el filtro de estado. */
     private fun refrescar() {
         val vista = _b ?: return
         val todos = Repositorio.productos
@@ -78,19 +85,27 @@ class ProductosAdminFragment : Fragment(R.layout.fragment_productos_admin) {
                 )
             )
             .setPositiveButton(R.string.aprobar) { _, _ ->
-                producto.estado = if (producto.stock == 0) EstadoProducto.AGOTADO else EstadoProducto.PUBLICADO
-                refrescar()
-                Snackbar.make(b.root, R.string.producto_aprobado, Snackbar.LENGTH_SHORT).show()
+                val estado = if (producto.stock == 0) EstadoProducto.AGOTADO else EstadoProducto.PUBLICADO
+                cambiarEstado(producto, estado, R.string.producto_aprobado)
             }
             .setNegativeButton(R.string.rechazar) { _, _ ->
-                producto.estado = EstadoProducto.RECHAZADO
-                refrescar()
-                Snackbar.make(b.root, R.string.producto_rechazado, Snackbar.LENGTH_SHORT).show()
+                cambiarEstado(producto, EstadoProducto.RECHAZADO, R.string.producto_rechazado)
             }
             .setNeutralButton(R.string.cancelar, null)
             .show()
     }
 
+    /** Guarda en Firestore el nuevo estado de moderación y muestra el resultado. */
+    private fun cambiarEstado(producto: Producto, estado: EstadoProducto, mensajeExito: Int) {
+        Repositorio.cambiarEstadoProducto(producto, estado) { resultado ->
+            val vista = _b ?: return@cambiarEstadoProducto
+            resultado
+                .onSuccess { Snackbar.make(vista.root, mensajeExito, Snackbar.LENGTH_SHORT).show() }
+                .onFailure { Snackbar.make(vista.root, requireContext().mensajeError(it), Snackbar.LENGTH_LONG).show() }
+        }
+    }
+
+    /** Abre el formulario de producto en modo edición. */
     private fun editar(producto: Producto) {
         startActivity(
             Intent(requireContext(), ProductoFormActivity::class.java)
@@ -98,19 +113,24 @@ class ProductosAdminFragment : Fragment(R.layout.fragment_productos_admin) {
         )
     }
 
+    /** Eliminación (D) de un producto con confirmación. */
     private fun confirmarEliminacion(producto: Producto) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.eliminar_producto_titulo)
             .setMessage(getString(R.string.eliminar_producto_mensaje, producto.nombre))
             .setNegativeButton(R.string.cancelar, null)
             .setPositiveButton(R.string.eliminar) { _, _ ->
-                Repositorio.eliminarProducto(producto.id)
-                refrescar()
-                Snackbar.make(b.root, R.string.producto_eliminado, Snackbar.LENGTH_SHORT).show()
+                Repositorio.eliminarProducto(producto) { resultado ->
+                    val vista = _b ?: return@eliminarProducto
+                    resultado
+                        .onSuccess { Snackbar.make(vista.root, R.string.producto_eliminado, Snackbar.LENGTH_SHORT).show() }
+                        .onFailure { Snackbar.make(vista.root, requireContext().mensajeError(it), Snackbar.LENGTH_LONG).show() }
+                }
             }
             .show()
     }
 
+    /** Libera la referencia al binding para evitar fugas de memoria del fragmento. */
     override fun onDestroyView() {
         super.onDestroyView()
         _b = null

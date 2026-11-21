@@ -21,13 +21,17 @@ class ProductoFilaAdapter(
     private val alEliminar: (Producto) -> Unit
 ) : RecyclerView.Adapter<ProductoFilaAdapter.FilaViewHolder>() {
 
+    /** Contenedor de las vistas de una fila (patrón ViewHolder con ViewBinding). */
     class FilaViewHolder(val b: ItemProductoFilaBinding) : RecyclerView.ViewHolder(b.root)
 
+    /** Infla el layout de la fila con ViewBinding. */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilaViewHolder =
         FilaViewHolder(ItemProductoFilaBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
+    /** Número de elementos que muestra la lista. */
     override fun getItemCount(): Int = productos.size
 
+    /** Llena la fila (nombre, precio, vendedor, estado, stock, foto) y conecta las acciones CRUD. */
     override fun onBindViewHolder(holder: FilaViewHolder, position: Int) {
         val producto = productos[position]
         val b = holder.b
@@ -46,6 +50,7 @@ class ProductoFilaAdapter(
         b.btnEliminar.setOnClickListener { alEliminar(producto) }
     }
 
+    /** Reemplaza la lista de productos mostrada. */
     @SuppressLint("NotifyDataSetChanged")
     fun actualizar(nuevos: List<Producto>) {
         productos = nuevos
